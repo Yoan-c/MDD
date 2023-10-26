@@ -45,14 +45,14 @@ public class AuthService {
 
     public void register(Register request){
         if (!checkValidationObject(request)) {
-            return;
+            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.findUserByEmail(request.getEmail()).isPresent()) {
-            return;
+            throw new ApiCustomError("Email is already taken", HttpStatus.BAD_REQUEST);
         }
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setUsername(request.getUsername());
+        user.setPseudo(request.getPseudo());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
     }
