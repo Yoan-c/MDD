@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entityDto.Login;
 import com.openclassrooms.mddapi.entityDto.Register;
+import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class AuthService {
     public String login(Login login) {
 
         if (!checkValidationObject(login)) {
-            return null;
+            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
         }
         try {
             authenticationManager.authenticate(
@@ -71,7 +72,7 @@ public class AuthService {
         }
         Optional<User> user = userRepository.findUserByEmail(login.getEmail());
         if (user.isEmpty()) {
-            return null;
+            throw new BadCredentialsException("Bad credential");
         }
         return jwtService.generateToken(user.get());
 
