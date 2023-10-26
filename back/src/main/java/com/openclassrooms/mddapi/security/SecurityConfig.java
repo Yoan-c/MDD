@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
                         .antMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                        .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement( session -> session
