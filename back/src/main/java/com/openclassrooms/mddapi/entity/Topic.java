@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Theme {
+public class Topic {
     @Id
     private String id;
     @NotBlank

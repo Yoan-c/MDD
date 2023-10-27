@@ -28,4 +28,14 @@ public class UserController {
     private UserDTO UpdateMe(@RequestBody HashMap<String, String> userInfo) {
         return userService.updateMe(userInfo);
     }
+
+    @PatchMapping("/sub/{idTopic}")
+    private void UpdateUserSub(@PathVariable String idTopic) {
+        userService.subscribe(idTopic);
+    }
+
+    @PatchMapping("/unsub/{idTopic}")
+    private void UpdateUserUnsub(@PathVariable String idTopic) {
+        userService.unSubscribe(idTopic);
+    }
 }

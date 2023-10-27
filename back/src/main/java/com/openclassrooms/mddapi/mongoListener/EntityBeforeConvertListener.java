@@ -1,13 +1,14 @@
 package com.openclassrooms.mddapi.mongoListener;
 
-import com.openclassrooms.mddapi.entity.Article;
+import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.Comment;
-import com.openclassrooms.mddapi.entity.Theme;
+import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Component
@@ -17,21 +18,29 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         T entity = event.getSource();
         Date currentDate = new Date();
 
-        if (entity == null)
-            return;
         if (entity instanceof Comment){
             updateDateOfComment((Comment) entity, currentDate);
         }
-        else if (entity instanceof Article){
-            updateDateOfArticle((Article) entity, currentDate);
+        else if (entity instanceof Post){
+            updateDateOfArticle((Post) entity, currentDate);
         }
         else if (entity instanceof User){
             updateDateOfUser((User) entity, currentDate);
+            initialistList((User) entity);
         }
-        else if (entity instanceof Theme){
-            updateDateOfTheme((Theme) entity, currentDate);
+        else if (entity instanceof Topic){
+            updateDateOfTheme((Topic) entity, currentDate);
         }
 
+    }
+
+    private void initialistList(User user) {
+        if (user.getIdTopic() == null)
+            user.setIdTopic(new ArrayList<>());
+        if  (user.getIdComment() == null)
+            user.setIdComment(new ArrayList<>());
+        if (user.getIdPost() == null)
+            user.setIdPost(new ArrayList<>());
     }
 
     private void updateDateOfComment(Comment comment, Date currentDate) {
@@ -41,11 +50,11 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         comment.setUpdated_at(currentDate);
     }
 
-    private void updateDateOfArticle(Article article, Date currentDate) {
-        if (article.getCreated_at() == null) {
-            article.setCreated_at(currentDate);
+    private void updateDateOfArticle(Post post, Date currentDate) {
+        if (post.getCreated_at() == null) {
+            post.setCreated_at(currentDate);
         }
-        article.setUpdated_at(currentDate);
+        post.setUpdated_at(currentDate);
     }
     private void updateDateOfUser(User user, Date currentDate) {
         if (user.getCreated_at() == null) {
@@ -54,11 +63,11 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         user.setUpdated_at(currentDate);
     }
 
-    private void updateDateOfTheme(Theme theme, Date currentDate) {
-        if (theme.getCreated_at() == null) {
-            theme.setCreated_at(currentDate);
+    private void updateDateOfTheme(Topic topic, Date currentDate) {
+        if (topic.getCreated_at() == null) {
+            topic.setCreated_at(currentDate);
         }
-        theme.setUpdated_at(currentDate);
+        topic.setUpdated_at(currentDate);
     }
 
 }

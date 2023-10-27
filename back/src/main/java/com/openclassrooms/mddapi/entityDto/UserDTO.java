@@ -11,8 +11,8 @@ public class UserDTO {
     private String email;
     private String pseudo;
     private List<String> idComment;
-    private List<String> idArticle;
-    private List<String> idTheme;
+    private List<String> idPost;
+    private List<String> idTopic;
     private Date created_at;
     private Date updated_at;
 }
