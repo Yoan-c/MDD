@@ -25,6 +25,8 @@ public class Post {
     private String post;
     @NotBlank
     private String idTopic;
+    @NotBlank
+    private String idUser;
     private List<String> idComment;
     @CreatedDate
     private Date created_at;

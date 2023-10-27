@@ -34,4 +34,9 @@ public class PostController {
     public Post createPost(@Valid @RequestBody PostDTO postDTO){
         return postService.createPost(postDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable String id){
+        postService.deletePost(id);
+    }
 }

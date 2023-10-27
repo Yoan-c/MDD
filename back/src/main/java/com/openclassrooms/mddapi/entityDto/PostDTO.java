@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.entityDto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
 
