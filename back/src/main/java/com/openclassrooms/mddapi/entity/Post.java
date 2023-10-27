@@ -22,7 +22,9 @@ public class Post {
     @NotBlank
     private String title;
     @NotBlank
-    private String article;
+    private String post;
+    @NotBlank
+    private String idTopic;
     private List<String> idComment;
     @CreatedDate
     private Date created_at;
