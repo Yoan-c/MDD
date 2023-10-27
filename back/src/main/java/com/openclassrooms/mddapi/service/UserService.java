@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -97,9 +96,5 @@ public class UserService {
                 this.saveUser(user);
             }
         }
-    }
-
-    public User getUserById(String id) {
-        return userRepository.findById(id).orElse(null);
     }
 }

@@ -35,14 +35,4 @@ public class TopicController {
         topicService.createTopic(topic);
         return topic;
     }
-
-    @DeleteMapping("/{id}")
-    public void deleteTopic(@PathVariable String id){
-        topicService.deleteTopic(id);
-    }
-
-    @PatchMapping("/{id}")
-    public Topic updateTopic(@RequestBody HashMap<String, String> topicInfo, @PathVariable String id){
-        return topicService.updateTopic(topicInfo, id);
-    }
 }

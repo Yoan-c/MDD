@@ -52,31 +52,5 @@ public class TopicService {
         return violations.isEmpty();
     }
 
-    public void deleteTopic(String id) {
-        if (topicRepository.existsById(id))
-            topicRepository.deleteById(id);
-    }
 
-    public Topic updateTopic(HashMap<String, String> topicInfo, String id) {
-        if (!topicRepository.existsById(id))
-            throw new ApiCustomError("Topic does not exist", HttpStatus.BAD_REQUEST);
-        Optional<Topic> topic = topicRepository.findById(id);
-        return topic.map(value -> updateValueTopic(topicInfo, value)).orElse(null);
-    }
-
-    private Topic updateValueTopic(HashMap<String, String> topicInfo, Topic topic) {
-        String label;
-        String topicContain;
-        if (topicInfo.containsKey("label")){
-            label = topicInfo.get("label");
-            if (topicRepository.existsByLabel(label))
-                throw new ApiCustomError("Title already exist", HttpStatus.BAD_REQUEST);
-            topic.setLabel(label);
-        }
-        if (topicInfo.containsKey("topic")){
-            topicContain = topicInfo.get("topic");
-            topic.setTopic(topicContain);
-        }
-        return topicRepository.save(topic);
-    }
 }
