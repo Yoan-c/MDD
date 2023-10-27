@@ -89,4 +89,12 @@ public class PostService {
         }
         return null;
     }
+
+    public Boolean isPostExist(String idPost){
+        return postRepository.existsById(idPost);
+    }
+
+    public Post savePost(Post post) {
+        return postRepository.save(post);
+    }
 }

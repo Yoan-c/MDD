@@ -23,10 +23,12 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         }
         else if (entity instanceof Post){
             updateDateOfArticle((Post) entity, currentDate);
+            initPostList((Post) entity);
+
         }
         else if (entity instanceof User){
             updateDateOfUser((User) entity, currentDate);
-            initialistList((User) entity);
+            initUsertList((User) entity);
         }
         else if (entity instanceof Topic){
             updateDateOfTheme((Topic) entity, currentDate);
@@ -34,7 +36,12 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
 
     }
 
-    private void initialistList(User user) {
+    private void initPostList(Post post) {
+        if (post.getIdComment() == null)
+            post.setIdComment(new ArrayList<>());
+    }
+
+    private void initUsertList(User user) {
         if (user.getIdTopic() == null)
             user.setIdTopic(new ArrayList<>());
         if  (user.getIdComment() == null)
