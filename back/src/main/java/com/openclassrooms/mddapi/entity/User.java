@@ -29,10 +29,10 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
     @NotBlank
-    private String username;
+    private String pseudo;
     private List<String> idComment;
-    private List<String> idArticle;
-    private List<String> idTheme;
+    private List<String> idPost;
+    private List<String> idTopic;
     @CreatedDate
     private Date created_at;
     @LastModifiedDate
