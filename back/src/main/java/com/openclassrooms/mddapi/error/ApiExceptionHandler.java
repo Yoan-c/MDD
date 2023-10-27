@@ -22,7 +22,6 @@ public class ApiExceptionHandler extends RuntimeException {
     @Autowired
     private CustomErrorController customErrorController;
 
-
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiError> handleBadCredentialsException(BadCredentialsException ex) {
         return customErrorController.CustomError(ex.getMessage(), HttpStatus.UNAUTHORIZED);
