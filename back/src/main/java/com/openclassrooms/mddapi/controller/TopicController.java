@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.service.TopicService;
 import lombok.extern.slf4j.Slf4j;

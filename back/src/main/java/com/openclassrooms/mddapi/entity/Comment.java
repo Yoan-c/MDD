@@ -26,6 +26,8 @@ public class Comment {
     private String comment;
     @NotBlank
     private String idPost;
+    @NotBlank
+    private String idUser;
     @CreatedDate
     private Date created_at;
     @LastModifiedDate

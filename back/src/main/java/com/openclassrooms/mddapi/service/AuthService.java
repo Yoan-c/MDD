@@ -45,7 +45,7 @@ public class AuthService {
 
     public void register(Register request){
         if (!checkValidationObject(request)) {
-            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.findUserByEmail(request.getEmail()).isPresent()) {
             throw new ApiCustomError("Email is already taken", HttpStatus.BAD_REQUEST);
@@ -60,7 +60,7 @@ public class AuthService {
     public String login(Login login) {
 
         if (!checkValidationObject(login)) {
-            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
         }
         try {
             authenticationManager.authenticate(

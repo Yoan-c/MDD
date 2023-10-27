@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import javax.validation.Validator;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -59,5 +60,20 @@ public class PostService {
 
     public Post savePost(Post post) {
         return postRepository.save(post);
+    }
+
+    public ArrayList<Post> getAllByTopicId(String idTopic) {
+        if (!topicService.isTopicExist(idTopic))
+            throw new ApiCustomError("Topic does not exist", HttpStatus.BAD_REQUEST);
+        return postRepository.findAllByIdTopic(idTopic);
+    }
+
+    public ArrayList<Post> getAllByTopicAllId(HashMap<String, ArrayList<String>> idsTopic) {
+        if (!idsTopic.containsKey("idTopic")) {
+            throw new ApiCustomError("No value idTopic", HttpStatus.BAD_REQUEST);
+        }
+        ArrayList<Post> post = new ArrayList<>();
+        idsTopic.get("idTopic").forEach((id) -> post.addAll(getAllByTopicId(id)));
+        return post;
     }
 }

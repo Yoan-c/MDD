@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Slf4j
 @RestController
@@ -28,6 +29,16 @@ public class PostController {
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable String id){
         return postService.getPostById(id);
+    }
+
+    @GetMapping("/topic/{id}")
+    public ArrayList<Post> getAllPostByTopicId(@PathVariable String id){
+        return postService.getAllByTopicId(id);
+    }
+
+    @GetMapping("/topic")
+    public ArrayList<Post> getAllPostByTopicAllId(@RequestBody HashMap<String, ArrayList<String>> idsTopic){
+        return postService.getAllByTopicAllId(idsTopic);
     }
 
     @PostMapping("")
