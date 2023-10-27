@@ -56,7 +56,7 @@ public class PostService {
         userService.saveUser(user);
         return post;
     }
-    
+
     public void deletePost(String id) {
         Post post;
         User user;
@@ -71,5 +71,22 @@ public class PostService {
             }
             postRepository.deleteById(id);
         }
+    }
+
+    public Post updatePost(PostDTO postDTO, String id) {
+        if (!postRepository.existsById(id))
+            throw new ApiCustomError("Post does not exists", HttpStatus.BAD_REQUEST);
+        if (postRepository.existsByTitle(postDTO.getTitle()))
+            throw new ApiCustomError("Title already exists", HttpStatus.BAD_REQUEST);
+        if (!topicService.isTopicExist(postDTO.getIdTopic()))
+            throw new ApiCustomError("Topic does not exists", HttpStatus.BAD_REQUEST);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()){
+            post.get().setTitle(postDTO.getTitle());
+            post.get().setPost(postDTO.getPost());
+            post.get().setIdTopic(postDTO.getIdTopic());
+            return post.get();
+        }
+        return null;
     }
 }
