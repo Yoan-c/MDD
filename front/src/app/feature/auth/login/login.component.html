@@ -1,0 +1,15 @@
+<mat-toolbar> img </mat-toolbar>
+<div class="login__main">
+  <div class="login__back">fleche</div>
+
+  <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+    <label for="email">email </label>
+    <input id="email" type="text" [formControl]="id" required />
+
+    <label for="password">password </label>
+    <input id="password" type="password" [formControl]="password" required />
+    <button type="submit" [disabled]="!loginFormGroup.valid">
+      Se connecter
+    </button>
+  </form>
+</div>
