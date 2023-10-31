@@ -12,6 +12,4 @@ public class Register {
     private String email;
     @NotBlank
     private String password;
-    @NotBlank
-    private String confirmPassword;
 }
