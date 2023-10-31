@@ -1,4 +1,4 @@
-.header__login {
+.header__register {
     background-color: white;
     border-bottom: 1px solid black;
     height: 9rem;
@@ -9,7 +9,8 @@
     }
 }
 
-.login {
+
+.register {
     &__back {
         position: relative;
 
@@ -43,7 +44,7 @@
 
 }
 
-.loginform {
+.registerform {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,4 +93,12 @@ a,
 a:visited {
     text-decoration: none;
     color: black;
+}
+
+.errorMsg {
+    list-style: 1;
+    color: red;
+    font-size: 1.2rem;
+    position: relative;
+    bottom: 1rem;
 }

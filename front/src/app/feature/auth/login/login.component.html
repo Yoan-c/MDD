@@ -1,15 +1,40 @@
-<mat-toolbar> img </mat-toolbar>
+<mat-toolbar class="header__login">
+  <img src="../../../../assets/logo_min.png" alt="logo MDD" />
+</mat-toolbar>
 <div class="login__main">
-  <div class="login__back">fleche</div>
+  <div class="main__header">
+    <div class="login__back">
+      <p><a routerLink="/">&larr;</a></p>
+    </div>
+    <div class="login__logo">
+      <img src="../../../../assets/logo_p6.png" alt="logo MDD" />
+    </div>
+  </div>
+  <div class="main__body">
+    <div class="loginform">
+      <div class="loginform__header">
+        <p>Se connecter</p>
+      </div>
+      <div class="loginform__body">
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+          <label for="email">email ou nom d'utilisateur</label>
+          <input id="email" type="text" [formControl]="pseudo" required />
 
-  <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
-    <label for="email">email </label>
-    <input id="email" type="text" [formControl]="id" required />
-
-    <label for="password">password </label>
-    <input id="password" type="password" [formControl]="password" required />
-    <button type="submit" [disabled]="!loginFormGroup.valid">
-      Se connecter
-    </button>
-  </form>
+          <label for="password">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            [formControl]="password"
+            required
+          />
+          <ng-container *ngIf="onError">
+            <p class="errorMsg" [innerHTML]="errorMsg"></p>
+          </ng-container>
+          <button type="submit" [disabled]="!loginFormGroup.valid">
+            Se connecter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

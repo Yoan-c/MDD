@@ -1,7 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from "rxjs";
-import { login } from "../interface/login.interface";
+import { Login } from "../interface/login.interface";
+
 
 @Injectable()
 export class LoginService {
@@ -10,8 +11,8 @@ export class LoginService {
 
     private apiUrl = 'http://localhost:8080/api/auth'
 
-    login(login: login): Observable<String> {
-        return this.http.post<string>(`${this.apiUrl}/login`, login)
+    login(login: Login): Observable<{token : string}> {
+        return this.http.post<{token : string}>(`${this.apiUrl}/login`, login)
     }
 
 }
