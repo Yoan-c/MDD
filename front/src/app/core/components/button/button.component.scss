@@ -1,0 +1,12 @@
+.button {
+    height: 3.8rem;
+    width: 22rem;
+    margin: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+
+    @media(max-width: 37.5em) {
+        height: 3rem;
+        width: 18rem;
+    }
+}

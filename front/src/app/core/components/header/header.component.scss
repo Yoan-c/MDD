@@ -1,0 +1,96 @@
+.header {
+    height: 8rem;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+
+    &__logoMenu {
+        display: none;
+
+        @media(max-width: 37.5em) {
+            display: block;
+            position: absolute;
+            top: 3rem;
+            right: 5rem;
+        }
+    }
+
+    &__logoUser {
+        @media(max-width: 37.5em) {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 1rem;
+        }
+    }
+
+    &__img {
+        img {
+            width: 14rem;
+            height: 8.1rem;
+        }
+    }
+
+    &__left {
+        margin-left: 2rem;
+    }
+
+    &__right {
+        display: flex;
+
+    }
+
+    &__menu {
+        width: 19rem;
+        font-size: 2rem;
+
+        @media(max-width: 37.5em) {
+            position: relative;
+            top: 10rem;
+        }
+
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+
+        @media(max-width: 37.5em) {
+            flex-direction: column;
+            right: 0;
+            position: absolute;
+            padding: 1rem;
+        }
+
+        & li:first-child {
+            @media(max-width: 37.5em) {
+                margin-bottom: 1.2rem;
+            }
+        }
+
+
+    }
+}
+
+
+.menu__logoUser {
+    display: flex;
+    justify-content: space-between;
+    width: 30rem;
+    align-items: center;
+    margin-right: 4rem;
+
+    @media(max-width: 37.5em) {
+        border: 2px solid black;
+        flex-direction: column;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        margin: 0;
+        width: 20rem;
+        z-index: 2;
+        background-color: white;
+    }
+}

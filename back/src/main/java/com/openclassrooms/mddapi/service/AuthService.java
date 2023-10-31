@@ -6,7 +6,6 @@ import com.openclassrooms.mddapi.entityDto.Register;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -45,10 +44,13 @@ public class AuthService {
 
     public void register(Register request){
         if (!checkValidationObject(request)) {
-            throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Veuillez remplir tous les champs", HttpStatus.BAD_REQUEST);
         }
         if (userRepository.findUserByEmail(request.getEmail()).isPresent()) {
-            throw new ApiCustomError("Email is already taken", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Cet e-mail est déjà pris", HttpStatus.BAD_REQUEST);
+        }
+        if (userRepository.findUserByPseudo(request.getPseudo()).isPresent()) {
+            throw new ApiCustomError("Ce pseudo est déjà pris", HttpStatus.BAD_REQUEST);
         }
         User user = new User();
         user.setEmail(request.getEmail());
@@ -58,19 +60,20 @@ public class AuthService {
     }
 
     public String login(Login login) {
-
+        String emailUser;
         if (!checkValidationObject(login)) {
             throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
         }
+        emailUser = checkLoginUser(login.getEmail());
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword())
+                    new UsernamePasswordAuthenticationToken(emailUser, login.getPassword())
             );
         }
         catch (BadCredentialsException ex){
             throw new BadCredentialsException("Bad credential");
         }
-        Optional<User> user = userRepository.findUserByEmail(login.getEmail());
+        Optional<User> user = userRepository.findUserByEmail(emailUser);
         if (user.isEmpty()) {
             throw new BadCredentialsException("Bad credential");
         }
@@ -80,6 +83,19 @@ public class AuthService {
     public boolean checkValidationObject(Register register) {
         Set<ConstraintViolation<Register>> violations = validator.validate(register);
         return violations.isEmpty();
+    }
+
+    public String checkLoginUser(String id){
+        Optional<User> userByEmail = userRepository.findUserByEmail(id);
+        Optional<User> userByPseudo;
+        if (userByEmail.isPresent()) {
+            return userByEmail.get().getEmail();
+        }
+        userByPseudo = userRepository.findUserByPseudo(id);
+        if (userByPseudo.isPresent()){
+            return userByPseudo.get().getEmail();
+        }
+        throw new ApiCustomError("Identifant / mot de passe incorrect", HttpStatus.BAD_REQUEST);
     }
 
     public boolean checkValidationObject(Login login) {
