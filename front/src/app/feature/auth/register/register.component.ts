@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
         error : err => {
           this.errorMsg = `erreur : ${err.error.message}`
           this.onError = true;
-          console.log(`err : ${err.error.message}`)}
+        }
       }
     )
   }
