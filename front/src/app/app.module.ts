@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './feature/auth/auth.module';
 import { IndexComponent } from './feature/index/index.component';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, IndexComponent],
@@ -17,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     AuthModule,
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
