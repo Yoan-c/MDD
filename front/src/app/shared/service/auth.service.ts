@@ -6,7 +6,6 @@ import { Router } from "@angular/router";
     providedIn: 'root',
 })
 export class AuthService {
-    private headers = new HttpHeaders().set('Content-Type', 'application/json');
     private isAuthenticate = false;
 
     constructor(private http : HttpClient, private router : Router){}

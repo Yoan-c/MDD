@@ -8,6 +8,7 @@ import { AuthModule } from './feature/auth/auth.module';
 import { IndexComponent } from './feature/index/index.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
+import { UserService } from './shared/service/user.service';
 
 @NgModule({
   declarations: [AppComponent, IndexComponent],

@@ -10,8 +10,13 @@ export class PostService {
 
     private apiUrl = 'http://localhost:8080/api'
 
-    getPost(): Observable<PostItem[]> {
-        return this.http.get<PostItem[]>(`${this.apiUrl}/post`)
+    getPost(idTopics : string[] | undefined): Observable<PostItem[]> {
+        const topic = {'topics' : idTopics};
+        return this.http.post<PostItem[]>(`${this.apiUrl}/post/topics`, topic)
+    }
+
+    create(PostItem: PostItem): Observable<void> {
+        return this.http.post<void>(`${this.apiUrl}/post`, PostItem)
     }
 
 }

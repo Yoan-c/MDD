@@ -5,6 +5,7 @@ import { LoginService } from '../service/login.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/service/auth.service';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   onError = false;
   errorMsg = "";
 
-  constructor(private loginService: LoginService, private router : Router, private authService : AuthService) { }
+  constructor(
+    private loginService: LoginService,
+    private router : Router,
+    private authService : AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.loginFormGroup.addControl('ID', this.pseudo )
@@ -51,6 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   connect(jwt : {token : string}) : void {
     this.authService.login(jwt.token)
+    this.userService.getMe();
     this.router.navigate(['/post'])
   }
 }

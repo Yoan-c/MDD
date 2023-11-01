@@ -1,0 +1,93 @@
+.header {
+    height: 7rem;
+    padding: 1rem;
+    margin: 1rem;
+    position: relative;
+    display: flex;
+
+    @media(max-width: 37.5em) {
+        flex-direction: column;
+        height: 11rem;
+    }
+
+    &__back {
+        font-size: 5rem;
+    }
+
+    &__title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: 600;
+        font-size: 2rem;
+        top: 16px;
+
+        @media(max-width: 37.5em) {
+            position: relative;
+            text-align: center;
+        }
+    }
+}
+
+.post {
+    position: relative;
+    width: 28rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+
+
+    }
+
+    &__title {
+        border: 1px solid black;
+    }
+
+
+}
+
+.form {
+    &__group {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+
+        textarea {
+            height: 21.2rem;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 2px solid rgba(119, 99, 197, 1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+    }
+
+    &__input--width {
+        width: 28.1rem;
+    }
+
+    &__input--height {
+        height: 4.8rem;
+    }
+}
+
+option:first {
+    color: #999;
+}
+
+option {
+    background-color: white;
+}
+
+
+a,
+a:visited {
+    text-decoration: none;
+    color: black;
+}
