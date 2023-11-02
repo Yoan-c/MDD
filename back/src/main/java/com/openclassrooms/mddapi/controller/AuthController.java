@@ -6,10 +6,7 @@ import com.openclassrooms.mddapi.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -34,5 +31,10 @@ public class AuthController {
         HashMap<String, String> token = new HashMap<>();
         token.put("token", authService.login(login));
         return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @GetMapping("/logout")
+    public void logout(){
+        authService.logout();
     }
 }

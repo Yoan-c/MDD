@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../interface/user.interface";
 import { BehaviorSubject, Observable, of, tap } from "rxjs";
+import { Topic } from "../interface/topic.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -30,5 +31,16 @@ export class UserService {
 
     sub(id: string): Observable<void> {
         return this.http.patch<void>(`${this.apiUrl}/sub/${id}`, "")
+    }
+
+    getAllTopicByUser(): Observable<Topic[]> {
+        return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
+    }
+
+    updateMe(pseudo: string, email: string): Observable<{token : string}>{
+        const user = {
+            pseudo, email
+        }
+        return this.http.patch<{token : string}>(`${this.apiUrl}/me`, user)
     }
 }

@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="main">
+  <div class="profile">
+    <div class="profile__title">
+      <p>Profil utilisateur</p>
+    </div>
+    <div class="profile__form">
+      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()" class="form">
+        <div class="form__group">
+          <input type="text" required [formControl]="pseudo" />
+        </div>
+        <div class="form__group">
+          <input type="email" [formControl]="email" required />
+        </div>
+        <div class="form__group">
+          <app-button label="Sauvegarder"></app-button>
+          <p class="logout" (click)="logout()">Se déconnecter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="main__separate">
+    <hr />
+  </div>
+  <div class="main__topic"></div>
+</div>

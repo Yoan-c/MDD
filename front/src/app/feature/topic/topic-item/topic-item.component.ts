@@ -48,6 +48,5 @@ export class TopicItemComponent implements OnInit, OnDestroy {
     this.subscribe$ = this.userService.sub(id).pipe(
       mergeMap(_ => {return this.userService.getMe()})
       ).subscribe();
-    
   }
 }

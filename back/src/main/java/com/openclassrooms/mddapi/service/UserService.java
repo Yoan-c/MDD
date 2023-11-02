@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entityDto.UserDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +23,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final BCryptPasswordEncoder passwordEncoder;
+
+    private final JwtService jwtService;
     private final TopicService topicService;
 
-    public UserService(UserRepository ur, TopicService ts) {
+    public UserService(UserRepository ur, TopicService ts, JwtService js) {
         this.userRepository = ur;
         this.modelMapper = new ModelMapper();
-        this.passwordEncoder = new BCryptPasswordEncoder();
+        this.jwtService = js;
         this.topicService = ts;
     }
 
@@ -34,8 +38,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean checkUserExist(String email){
+    public boolean checkUserExistByEmail(String email){
         Optional<User> user = userRepository.findUserByEmail(email);
+        return user.isPresent();
+    }
+
+    public boolean checkUserExistByPseudo(String pseudo){
+        Optional<User> user = userRepository.findUserByPseudo(pseudo);
         return user.isPresent();
     }
     public User getUserByContext(){
@@ -56,25 +65,28 @@ public class UserService {
         return null;
     }
 
-    public UserDTO updateMe(HashMap<String, String> userInfo) {
+    public String updateMe(HashMap<String, String> userInfo) {
         User user = getUserByContext();
-        if (userInfo.containsKey("email") && checkUserExist(userInfo.get("email"))){
-            throw new ApiCustomError("Email is already taken", HttpStatus.BAD_REQUEST);
+        String email;
+        String pseudo;
+        if (!(userInfo.containsKey("email") && userInfo.containsKey("pseudo")))
+            throw new ApiCustomError("Veuillez entrer toute les informations", HttpStatus.BAD_REQUEST);
+        email = userInfo.get("email");
+        pseudo = userInfo.get("pseudo");
+        if (!user.getEmail().equals(email) && checkUserExistByEmail(email)){
+            throw new ApiCustomError("L'email est déjà utilisé", HttpStatus.BAD_REQUEST);
         }
-        convertUserDtoToUser(userInfo, user);
-        return modelMapper.map(user, UserDTO.class);
+        if ( !user.getPseudo().equals(pseudo) && checkUserExistByPseudo(pseudo)){
+            throw new ApiCustomError("Le pseudo est déjà utilisé", HttpStatus.BAD_REQUEST);
+        }
+        return updateUser(userInfo, user);
     }
 
-    public void convertUserDtoToUser(HashMap<String, String> userInfo, User user){
-        if (userInfo.containsKey("pseudo"))
-            user.setPseudo(userInfo.get("pseudo"));
-        if (userInfo.containsKey("email"))
-            user.setEmail(userInfo.get("email"));
-        if (userInfo.containsKey("password") && userInfo.containsKey("confirmPassword")) {
-            if (userInfo.get("password").equals(userInfo.get("confirmPassword")))
-                user.setPassword(passwordEncoder.encode(userInfo.get("password")));
-        }
+    public String updateUser(HashMap<String, String> userInfo, User user){
+        user.setPseudo(userInfo.get("pseudo"));
+        user.setEmail(userInfo.get("email"));
         this.saveUser(user);
+        return jwtService.generateToken(user);
     }
 
     public void subscribe(String idTopic) {
@@ -96,5 +108,16 @@ public class UserService {
                 this.saveUser(user);
             }
         }
+    }
+
+    public ArrayList<Topic> getAllTopicByUser() {
+        User user = this.getUserByContext();
+        ArrayList<Topic> topic = new ArrayList<>();
+        for (String id : user.getIdTopic()){
+            Topic newTopic = topicService.getTopicById(id);
+            if (newTopic != null)
+               topic.add(newTopic);
+        }
+        return topic;
     }
 }

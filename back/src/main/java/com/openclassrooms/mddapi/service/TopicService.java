@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.Topic;
+import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entityDto.Login;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.TopicRepository;
@@ -20,6 +21,7 @@ import java.util.Set;
 public class TopicService {
 
     private final TopicRepository topicRepository;
+
     private final Validator validator;
 
     public TopicService(TopicRepository tr, Validator val){
