@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', loadChildren: () => import('./feature/auth/auth.module').then(m => m.AuthModule) },
   {path : 'post', loadChildren: () => import('./feature/post/post.module').then(m => m.PostModule)},
+  {path : 'topic', loadChildren: () => import('./feature/topic/topic.module').then(m => m.TopicModule)},
   {path: '**', redirectTo : '/'}
 ];
 

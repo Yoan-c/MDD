@@ -15,7 +15,6 @@ export class PostListComponent {
 
   onClick() {
     this.router.navigate(['/post/post'], {queryParams : {id : this.postItem?.id}})
-    
   }
   
 }

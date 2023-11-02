@@ -9,9 +9,9 @@
     </div>
     <div class="comment__post">
       <div class="comment__contain">
-        <div class="error" *ngIf="onError">
-          <p>Une erreur est inattendu est survenu</p>
-        </div>
+        <ng-container *ngIf="onError">
+          <p class="error">Une erreur est inattendu est survenu</p>
+        </ng-container>
         <textarea
           name=""
           id="commentContain"

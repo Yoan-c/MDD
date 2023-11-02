@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../interface/user.interface";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, Observable, of, tap } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -19,14 +19,16 @@ export class UserService {
         }
     }
     
-    getMe(): void {
-        this.http.get<User>(`${this.apiUrl}/me`)
-        .subscribe({
-            next : (user) => {
+    getMe(): Observable<User> {
+        return this.http.get<User>(`${this.apiUrl}/me`).pipe(
+            tap(user => {
                 this.userSubject.next(user)
                 localStorage.setItem('user', JSON.stringify(user))
-            },
-            error : (err) => console.log(err)
-        })
+            })
+        )
+    }
+
+    sub(id: string): Observable<void> {
+        return this.http.patch<void>(`${this.apiUrl}/sub/${id}`, "")
     }
 }

@@ -30,7 +30,7 @@ export class PostComponent implements OnInit, OnDestroy {
         return this.postService.getPostById(param['id'])
       }),
       mergeMap(post => {
-        this.postItem = post
+        this.postItem = post        
         return this.topicService.getTopicById(post.idTopic!)
       })
     ).subscribe({

@@ -7,9 +7,9 @@ import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   
-  {path : '', component : PostItemComponent, canActivate : [authGuard]},
-  {path : ':id', component : PostComponent, canActivate : [authGuard]},
   {path : 'create', component : PostFormComponent, canActivate : [authGuard]},
+  {path : ':id', component : PostComponent, canActivate : [authGuard]},
+  {path : '', component : PostItemComponent, canActivate : [authGuard]},
 ];
 
 @NgModule({
