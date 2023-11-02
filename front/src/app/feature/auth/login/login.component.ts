@@ -57,7 +57,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   connect(jwt : {token : string}) : void {
     this.authService.login(jwt.token)
-    this.userService.getMe();
-    this.router.navigate(['/post'])
+    this.userService.getMe().subscribe({
+      next : token => this.router.navigate(['/post'])
+    });
+
   }
 }
