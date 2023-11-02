@@ -15,4 +15,8 @@ export class TopicService {
     getTopic(): Observable<Topic[]> {
         return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
     }
+
+    getTopicById(id : string): Observable<Topic> {
+        return this.http.get<Topic>(`${this.apiUrl}/topic/${id}`)
+    }
 }

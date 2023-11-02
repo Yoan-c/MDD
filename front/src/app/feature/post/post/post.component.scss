@@ -1,0 +1,54 @@
+.header {
+    padding: 2rem;
+    height: 8rem;
+    position: relative;
+    display: flex;
+
+    &__left {
+        font-size: 5rem;
+        display: inline-block;
+    }
+
+    &__title {
+        font-size: 2.4rem;
+        font-weight: 600;
+        position: absolute;
+        left: 8.6rem;
+        top: 2.3rem;
+    }
+}
+
+.post {
+    position: relative;
+    left: 8.9rem;
+    width: 80%;
+
+    &__header {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__date,
+    &__auteur,
+    &__theme {
+        padding: 0.3rem;
+        min-width: 8.5rem;
+        height: 3.5rem;
+        margin-right: 0.5rem;
+    }
+
+    &__contain {
+        position: relative;
+        margin-top: 4rem;
+    }
+}
+
+.comment {
+    margin-top: 2rem;
+}
+
+a,
+a:visited {
+    color: black;
+    text-decoration: none;
+}

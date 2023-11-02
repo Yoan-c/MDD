@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="main" *ngIf="postItem && topic">
+  <div class="header">
+    <div class="header__left">
+      <p><a routerLink="/post">&larr;</a></p>
+    </div>
+    <div class="header__title">
+      <p>{{ postItem.title }}</p>
+    </div>
+  </div>
+  <div class="post">
+    <div class="post__header">
+      <div class="post__date">
+        <p>{{ postItem.created_at | date : "dd/MM/Y H:mm" }}</p>
+      </div>
+      <div class="post__auteur">
+        <p>{{ postItem.idUser }}</p>
+      </div>
+      <div class="post__theme">
+        <p>{{ topic.label }}</p>
+      </div>
+    </div>
+    <div class="post__contain">
+      <p>{{ postItem.post }}</p>
+    </div>
+    <div class="post__separate">
+      <hr />
+    </div>
+    <div class="comment">
+      <app-comment [idPost]="postItem.id!"></app-comment>
+    </div>
+  </div>
+</div>

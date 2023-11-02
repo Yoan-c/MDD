@@ -9,13 +9,18 @@ import { PostService } from './service/post-item.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PostFormComponent } from './post-form/post-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PostComponent } from './post/post.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentService } from './service/comment.service';
 
 
 @NgModule({
   declarations: [
     PostItemComponent,
     PostListComponent,
-    PostFormComponent
+    PostFormComponent,
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +29,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     ReactiveFormsModule
   ],
-  providers : [PostService]
+  providers : [PostService, CommentService]
 })
 export class PostModule { }

@@ -19,4 +19,8 @@ export class PostService {
         return this.http.post<void>(`${this.apiUrl}/post`, PostItem)
     }
 
+    getPostById(idPost: string): Observable<PostItem>{
+        return this.http.get<PostItem>(`${this.apiUrl}/post/${idPost}`)
+    }
+
 }
