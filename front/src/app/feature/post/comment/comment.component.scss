@@ -1,0 +1,49 @@
+.comment {
+    position: absolute;
+    left: 3.4rem;
+    width: 90%;
+
+    &__info {
+        position: relative;
+        display: flex;
+        min-height: 13rem;
+    }
+
+    &__user {
+        width: 8rem;
+
+        p {
+            overflow-wrap: break-word;
+        }
+    }
+
+    &__show {
+        position: absolute;
+        left: 9rem;
+        background-color: #EEEEEE;
+        width: 44.9rem;
+        min-height: 10rem;
+        border-radius: 1.6rem;
+        padding: 1.2rem;
+    }
+
+    &__post {
+        display: flex;
+        align-items: center;
+    }
+
+    &__contain {
+        margin-right: 4rem;
+
+        textarea {
+            width: 66rem;
+            height: 9rem;
+            padding: 1rem;
+            border-radius: 1.6rem;
+        }
+    }
+}
+
+.error {
+    color: red;
+}

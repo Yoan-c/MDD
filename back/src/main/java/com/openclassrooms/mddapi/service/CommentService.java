@@ -41,7 +41,7 @@ public class CommentService {
         User user = userService.getUserByContext();
         comment.setIdPost(commentDTO.getIdPost());
         comment.setComment(commentDTO.getComment());
-        comment.setIdUser(user.getId());
+        comment.setIdUser(user.getPseudo());
         Comment newComment = commentRepository.save(comment);
         user.getIdComment().add(newComment.getId());
         userService.saveUser(user);

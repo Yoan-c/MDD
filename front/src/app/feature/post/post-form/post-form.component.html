@@ -1,0 +1,59 @@
+<app-header></app-header>
+<div class="main">
+  <div class="header">
+    <div class="header__back">
+      <p><a routerLink="/post">&larr;</a></p>
+    </div>
+    <div class="header__title">
+      <p>Créer un nouvel article</p>
+    </div>
+  </div>
+  <div class="post">
+    <form
+      [formGroup]="postFormGroup"
+      (ngSubmit)="onSubmit()"
+      class="post__form"
+    >
+      <div class="form__group">
+        <select
+          name=""
+          id=""
+          class="form__input--width form__input--height"
+          [formControl]="theme"
+          required
+        >
+          <option selected value="">Sélectionner un thème</option>
+          <option *ngFor="let topic of topic" #t value="{{ topic.id }}">
+            {{ topic.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form__group">
+        <input
+          type="text"
+          placeholder="Titre de l'article"
+          class="form__input--width form__input--height"
+          [formControl]="postTitle"
+          required
+        />
+      </div>
+      <div class="form__group">
+        <textarea
+          name=""
+          id=""
+          placeholder="Contenu de l'article"
+          class="form__input--width"
+          [formControl]="postContain"
+          required
+        ></textarea>
+      </div>
+      <div class="form__group">
+        <app-button
+          label="Créer"
+          color="white"
+          bgColor="rgba(119, 99, 197, 1)"
+        ></app-button>
+      </div>
+    </form>
+  </div>
+</div>

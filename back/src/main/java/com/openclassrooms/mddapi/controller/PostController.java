@@ -36,6 +36,11 @@ public class PostController {
         return postService.getAllByTopicId(id);
     }
 
+    @PostMapping("/topics")
+    public ArrayList<Post> getAllPostByTopics(@RequestBody HashMap<String, String[]> topics){
+        return postService.getAllByTopics(topics);
+    }
+
     @GetMapping("/topic")
     public ArrayList<Post> getAllPostByTopicAllId(@RequestBody HashMap<String, ArrayList<String>> idsTopic){
         return postService.getAllByTopicAllId(idsTopic);

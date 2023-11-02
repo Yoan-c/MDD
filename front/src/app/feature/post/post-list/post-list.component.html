@@ -1,0 +1,16 @@
+<mat-card class="card" (click)="onClick()">
+  <mat-card-header class="card__header">
+    <mat-card-title class="card__title"
+      >{{ postItem!.title }} test</mat-card-title
+    >
+    <mat-card-subtitle class="card__subtitle">
+      <span class="subtitle__date">{{
+        postItem!.created_at | date : "dd/MM/Y H:mm"
+      }}</span>
+      <span class="subtitle__auteur">{{ postItem!.idUser }}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="card__contain">
+    <p>{{ postItem!.post }}</p>
+  </mat-card-content>
+</mat-card>

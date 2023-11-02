@@ -1,0 +1,28 @@
+.card {
+    background: rgba(245, 245, 245, 1);
+    width: 35.9rem;
+    height: 18rem;
+
+    &__title {
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+
+    &__contain {
+        margin-left: 1.6rem;
+    }
+}
+
+.subtitle {
+
+    &__date,
+    &__auteur {
+        color: black
+    }
+
+    &__auteur {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

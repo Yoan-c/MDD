@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import javax.validation.Validator;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 @Slf4j
@@ -47,7 +48,7 @@ public class PostService {
         post.setPost(postDTO.getPost());
         post.setTitle(postDTO.getTitle());
         post.setIdTopic(postDTO.getIdTopic());
-        post.setIdUser(user.getId());
+        post.setIdUser(user.getPseudo());
         Post newPost = postRepository.insert(post);
         user.getIdPost().add(newPost.getId());
         userService.saveUser(user);
@@ -75,5 +76,21 @@ public class PostService {
         ArrayList<Post> post = new ArrayList<>();
         idsTopic.get("idTopic").forEach((id) -> post.addAll(getAllByTopicId(id)));
         return post;
+    }
+
+    public ArrayList<Post> getAllByTopics(HashMap<String, String[]> topics) {
+        ArrayList<Post> posts = new ArrayList<>();
+        if (!topics.containsKey("topics"))
+            return posts;
+        try {
+            for (String id : topics.get("topics")){
+                ArrayList<Post> post = postRepository.findAllByIdTopic(id);
+                posts.addAll(post);
+            }
+            posts.sort(Comparator.comparing(Post::getCreated_at).reversed());
+            return posts;
+        } catch (Exception ex){
+            throw new ApiCustomError("Vérifier les articles", HttpStatus.BAD_REQUEST);
+        }
     }
 }
