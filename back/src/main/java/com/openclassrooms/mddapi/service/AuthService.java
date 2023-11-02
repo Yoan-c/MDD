@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -101,5 +102,9 @@ public class AuthService {
     public boolean checkValidationObject(Login login) {
         Set<ConstraintViolation<Login>> violations = validator.validate(login);
         return violations.isEmpty();
+    }
+
+    public void logout() {
+        SecurityContextHolder.clearContext();
     }
 }

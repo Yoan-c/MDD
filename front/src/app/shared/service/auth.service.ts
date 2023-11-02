@@ -1,12 +1,14 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     private isAuthenticate = false;
+    private apiUrl = 'http://localhost:8080/api/auth'
 
     constructor(private http : HttpClient, private router : Router){}
 
@@ -31,8 +33,11 @@ export class AuthService {
         return token !== null ? true : false;
     }
 
-    logout () {
+
+    logout(): Observable<void> {
         localStorage.removeItem('jwt');
+        localStorage.removeItem('user')
+        return this.http.get<void>(`${this.apiUrl}/logout`)
     }
 
     login(token : string) {

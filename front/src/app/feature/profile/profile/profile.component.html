@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="main">
+  <div class="profile">
+    <div class="profile__title">
+      <p>Profil utilisateur</p>
+    </div>
+    <div class="profile__form">
+      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()" class="form">
+        <div class="form__group">
+          <input type="text" required [formControl]="pseudo" />
+        </div>
+        <div class="form__group">
+          <input type="email" [formControl]="email" required />
+        </div>
+        <div class="form__group">
+          <app-button label="Sauvegarder"></app-button>
+          <p class="logout" (click)="logout()">Se déconnecter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="main__separate">
+    <hr />
+  </div>
+  <div class="topicSection">
+    <div class="topicSection__title">
+      <p>Abonnements</p>
+    </div>
+    <div class="topicSection__card">
+      <div class="card" *ngFor="let topic of topics">
+        <div class="card__title">
+          <p>{{ topic.label }}</p>
+        </div>
+        <div class="card__contain">
+          Description: {{ topic.topic | slice : 0 : 100
+          }}{{ topic.topic.length > 100 ? "..." : "" }}
+        </div>
+        <div class="card__button">
+          <app-button
+            label="Se désabonner"
+            (click)="unSubscribeUser(topic.id)"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

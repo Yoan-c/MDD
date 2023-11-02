@@ -18,4 +18,8 @@ export class HeaderComponent{
     this.router.navigate(['/topic']);
   }
 
+  goProfile() {
+    this.router.navigate(['/profile']);
+  }
+
 }
