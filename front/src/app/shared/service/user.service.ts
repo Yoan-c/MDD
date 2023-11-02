@@ -33,6 +33,10 @@ export class UserService {
         return this.http.patch<void>(`${this.apiUrl}/sub/${id}`, "")
     }
 
+    unSubscribeUser(id: string): Observable<void> {
+        return this.http.patch<void>(`${this.apiUrl}/unsub/${id}`, "")
+    }
+
     getAllTopicByUser(): Observable<Topic[]> {
         return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
     }

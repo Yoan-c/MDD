@@ -24,5 +24,26 @@
   <div class="main__separate">
     <hr />
   </div>
-  <div class="main__topic"></div>
+  <div class="topicSection">
+    <div class="topicSection__title">
+      <p>Abonnements</p>
+    </div>
+    <div class="topicSection__card">
+      <div class="card" *ngFor="let topic of topics">
+        <div class="card__title">
+          <p>{{ topic.label }}</p>
+        </div>
+        <div class="card__contain">
+          Description: {{ topic.topic | slice : 0 : 100
+          }}{{ topic.topic.length > 100 ? "..." : "" }}
+        </div>
+        <div class="card__button">
+          <app-button
+            label="Se désabonner"
+            (click)="unSubscribeUser(topic.id)"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

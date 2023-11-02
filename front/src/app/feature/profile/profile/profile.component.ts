@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit , OnDestroy {
 
   auth$!: Subscription
   user$!: Subscription
-  topics$!: Subscription;
+  unSubTopics$!: Subscription;
   topics!: Topic[]
   user!: User
   profileFormGroup = new FormGroup({});
@@ -53,6 +53,8 @@ export class ProfileComponent implements OnInit , OnDestroy {
       this.user$.unsubscribe();
       if (this.auth$)
         this.auth$.unsubscribe();
+      if (this.unSubTopics$)
+      this.unSubTopics$.unsubscribe();
   }
 
   logout(){
@@ -61,8 +63,6 @@ export class ProfileComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-    console.log('Submit');
-    console.log(this.profileFormGroup);
     if (this.profileFormGroup.status === "INVALID")
       return
     this.userService.updateMe(this.pseudo.value, this.email.value).pipe(
@@ -73,17 +73,33 @@ export class ProfileComponent implements OnInit , OnDestroy {
     ).subscribe(
       {
         next : user => { this.user = user;
-            this.successMsg = "utilisateur modifié"
-            this.errorMsg = ""
+          this.showSuccessMsg()
         },
-        error : err => {
-          console.log(err)
-          this.successMsg = ""
-            this.errorMsg = err.error.message
-        }
-        
+        error : err => this.showErrorMsg(err)
       }
     )
+  }
+
+  showSuccessMsg() {
+    this.successMsg = "utilisateur modifié"
+    this.errorMsg = ""
+  }
+  showErrorMsg(err: { error: { message: string; }; }) {
+    this.successMsg = ""
+    this.errorMsg = err.error.message
+  }
+
+  unSubscribeUser(id : string) : void {
+    this.unSubTopics$ = this.userService.unSubscribeUser(id).pipe(
+      mergeMap(() => {
+        this.removeTopic(id)
+        return this.userService.getMe()
+      })
+    ).subscribe();
+  }
+
+  removeTopic(id : string) {
+    this.topics = this.topics.filter(topic => topic.id !== id)
   }
 
 }
