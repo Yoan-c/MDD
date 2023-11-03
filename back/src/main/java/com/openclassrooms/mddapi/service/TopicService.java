@@ -44,9 +44,9 @@ public class TopicService {
 
     public void createTopic(Topic topic) {
         if (!checkValidationTopic(topic))
-            throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
         if (topicRepository.existsByLabel(topic.getLabel()))
-            throw new ApiCustomError("Topic already exists", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Le thème existe déjà", HttpStatus.BAD_REQUEST);
         topicRepository.insert(topic);
     }
     public boolean checkValidationTopic(Topic topic) {

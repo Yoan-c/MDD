@@ -21,7 +21,7 @@ public class PostService {
     private final UserService userService;
     private final TopicService topicService;
 
-    public PostService(PostRepository pr, Validator val, TopicService ts, UserService us){
+    public PostService(PostRepository pr, TopicService ts, UserService us){
         this.postRepository = pr;
         this.topicService = ts;
         this.userService = us;
@@ -39,10 +39,10 @@ public class PostService {
 
     public Post createPost(PostDTO postDTO) {
         if (postRepository.existsByTitle(postDTO.getTitle())){
-            throw new ApiCustomError("Title already exists", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Le titre est déjà pris", HttpStatus.BAD_REQUEST);
         }
         if (!topicService.isTopicExist(postDTO.getIdTopic()))
-            throw new ApiCustomError("Topic does not exist", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Le thème n'existe pas", HttpStatus.BAD_REQUEST);
         Post post = new Post();
         User user = userService.getUserByContext();
         post.setPost(postDTO.getPost());
@@ -65,13 +65,13 @@ public class PostService {
 
     public ArrayList<Post> getAllByTopicId(String idTopic) {
         if (!topicService.isTopicExist(idTopic))
-            throw new ApiCustomError("Topic does not exist", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Le thème n'existe pas", HttpStatus.BAD_REQUEST);
         return postRepository.findAllByIdTopic(idTopic);
     }
 
     public ArrayList<Post> getAllByTopicAllId(HashMap<String, ArrayList<String>> idsTopic) {
         if (!idsTopic.containsKey("idTopic")) {
-            throw new ApiCustomError("No value idTopic", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Aucun ID trouvé", HttpStatus.BAD_REQUEST);
         }
         ArrayList<Post> post = new ArrayList<>();
         idsTopic.get("idTopic").forEach((id) -> post.addAll(getAllByTopicId(id)));

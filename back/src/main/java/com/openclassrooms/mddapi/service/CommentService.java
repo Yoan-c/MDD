@@ -30,14 +30,14 @@ public class CommentService {
 
     public ArrayList<Comment> getAllCommentByPost(String idPost){
         if (!postService.isPostExist(idPost))
-            throw new ApiCustomError("Post does not exist", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("L'article n'existe pas", HttpStatus.BAD_REQUEST);
         return commentRepository.findAllByIdPost(idPost);
     }
 
     public Comment createComment(CommentDTO commentDTO) {
         Comment comment = new Comment();
         if (!postService.isPostExist(commentDTO.getIdPost()))
-            throw new ApiCustomError("Post does not exist", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("L'article n'existe pas", HttpStatus.BAD_REQUEST);
         User user = userService.getUserByContext();
         comment.setIdPost(commentDTO.getIdPost());
         comment.setComment(commentDTO.getComment());

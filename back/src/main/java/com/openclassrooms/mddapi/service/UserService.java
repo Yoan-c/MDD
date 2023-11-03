@@ -10,12 +10,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -26,12 +29,14 @@ public class UserService {
 
     private final JwtService jwtService;
     private final TopicService topicService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository ur, TopicService ts, JwtService js) {
+    public UserService(UserRepository ur, TopicService ts, JwtService js, PasswordEncoder ps) {
         this.userRepository = ur;
         this.modelMapper = new ModelMapper();
         this.jwtService = js;
         this.topicService = ts;
+        this.passwordEncoder = ps;
     }
 
     public User saveUser (User user){
@@ -56,7 +61,7 @@ public class UserService {
     public UserDTO getMe(){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = Optional.ofNullable(userRepository.findUserByEmail(email).orElseThrow(() ->
-                new ApiCustomError("an error occured", HttpStatus.NOT_FOUND)));
+                new ApiCustomError("Utilisateur inexistant", HttpStatus.NOT_FOUND)));
         if (user.isPresent()) {
             UserDTO userDTO = modelMapper.map(user.get(), UserDTO.class);
             log.info(user.get().toString());
@@ -85,8 +90,20 @@ public class UserService {
     public String updateUser(HashMap<String, String> userInfo, User user){
         user.setPseudo(userInfo.get("pseudo"));
         user.setEmail(userInfo.get("email"));
+        if (userInfo.containsKey("password") && userInfo.containsKey("confirmPassword"))
+            user.setPassword(checkPassword(userInfo.get("password"), userInfo.get("confirmPassword")));
         this.saveUser(user);
         return jwtService.generateToken(user);
+    }
+
+    public String checkPassword(String mdp, String confirmMdp) {
+        String regex = "";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mdp);
+        if (mdp.equals(confirmMdp) && matcher.find())
+            return this.passwordEncoder.encode(mdp);
+        else
+            throw new ApiCustomError("Vérifier les mots de passe", HttpStatus.BAD_REQUEST);
     }
 
     public void subscribe(String idTopic) {

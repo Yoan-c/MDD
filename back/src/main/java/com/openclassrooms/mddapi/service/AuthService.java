@@ -63,7 +63,7 @@ public class AuthService {
     public String login(Login login) {
         String emailUser;
         if (!checkValidationObject(login)) {
-            throw new ApiCustomError("Please complete the fields", HttpStatus.BAD_REQUEST);
+            throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
         }
         emailUser = checkLoginUser(login.getEmail());
         try {
@@ -72,11 +72,11 @@ public class AuthService {
             );
         }
         catch (BadCredentialsException ex){
-            throw new BadCredentialsException("Bad credential");
+            throw new BadCredentialsException("Identifant / mot de passe incorrect");
         }
         Optional<User> user = userRepository.findUserByEmail(emailUser);
         if (user.isEmpty()) {
-            throw new BadCredentialsException("Bad credential");
+            throw new BadCredentialsException("Identifant / mot de passe incorrect");
         }
         return jwtService.generateToken(user.get());
 
