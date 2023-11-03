@@ -8,11 +8,20 @@
         justify-content: space-between;
         height: 8rem;
         position: relative;
+
+        @media(max-width: 37.5em) {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     &__card {
         display: flex;
         flex-wrap: wrap;
+
+        @media(max-width: 37.5em) {
+            justify-content: center;
+        }
     }
 
     &__list {
@@ -21,15 +30,31 @@
 }
 
 .option {
+
     &__right {
         font-weight: 700;
         position: absolute;
         right: 4rem;
         top: 1.7rem;
+
+        @media(max-width: 37.5em) {
+            position: relative;
+            right: 0;
+        }
     }
 
     &__left {
         position: relative;
-        left: 10px
+        left: 10px;
+
+        @media(max-width: 37.5em) {
+            left: 0;
+        }
+
     }
+}
+
+.createPostButton {
+    width: 15.3rem;
+    height: 4rem;
 }

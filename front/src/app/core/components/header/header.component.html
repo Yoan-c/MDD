@@ -5,22 +5,28 @@
     </div>
   </div>
   <div class="header__right">
-    <div class="menu__logoUser">
+    <div
+      id="menuMobile"
+      class="menu__logoUser"
+      [@slideAnimation]="isSlideIn ? 'slide-in' : ''"
+    >
       <div class="header__menu">
         <ul>
-          <li (click)="goPost()">Articles</li>
-          <li (click)="goTopic()">Thèmes</li>
+          <li #post (click)="goPost()">Articles</li>
+          <li #topic (click)="goTopic()">Thèmes</li>
         </ul>
       </div>
       <div class="header__logoUser">
         <img
+          id="profileImg"
           src="../../../../assets/useruserImg.png"
           alt="user image"
           (click)="goProfile()"
+          #profile
         />
       </div>
     </div>
-    <div class="header__logoMenu">
+    <div class="header__logoMenu" (click)="displayMenu()">
       <img src="../../../../assets/menuLogo.png" alt="logo menu" />
     </div>
   </div>
