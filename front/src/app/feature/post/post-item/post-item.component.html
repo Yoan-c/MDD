@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="option__right">
-      <p>Trier par &darr;</p>
+      <p (click)="sortPost()">Trier par <span [innerHTML]="arrow"></span></p>
     </div>
   </div>
   <div class="post__contain">
