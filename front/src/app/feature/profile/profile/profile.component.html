@@ -15,7 +15,14 @@
           <input type="email" [formControl]="email" required />
         </div>
         <div class="form__group">
-          <app-button label="Sauvegarder"></app-button>
+          <div class="saveButton">
+            <app-button
+              label="Sauvegarder"
+              color="white"
+              border="none"
+              bgColor="rgba(119, 99, 197, 1)"
+            ></app-button>
+          </div>
           <p class="logout" (click)="logout()">Se déconnecter</p>
         </div>
       </form>
@@ -41,6 +48,9 @@
           <app-button
             label="Se désabonner"
             (click)="unSubscribeUser(topic.id)"
+            color="white"
+            border="none"
+            bgColor="rgba(119, 99, 197, 1)"
           ></app-button>
         </div>
       </div>
