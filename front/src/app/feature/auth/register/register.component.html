@@ -26,8 +26,14 @@
           <ng-container *ngIf="onError">
             <p class="errorMsg" [innerHTML]="errorMsg"></p>
           </ng-container>
-          <!-- <button type="submit" [disabled]="!registerForm.valid"> -->
-          <button type="submit">S'inscrire</button>
+          <div class="authButton">
+            <app-button
+              label="S'inscrire"
+              color="white"
+              bgColor="rgba(119, 99, 197, 1)"
+              border="none"
+            ></app-button>
+          </div>
         </form>
       </div>
     </div>

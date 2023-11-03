@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   password = new FormControl("");
   loginFormGroup = new FormGroup({});
   loginUser! : Login;
-  onError = false;
   errorMsg = "";
 
   constructor(
@@ -41,15 +40,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
+    if (this.loginFormGroup.status === 'INVALID'){
+      
+      this.errorMsg= "erreur : Vérifier les différents champs"
+      return
+    }
     this.loginUser.email = this.pseudo.value!;
     this.loginUser.password = this.password.value!
     this.login$ = this.loginService.login(this.loginUser).subscribe({
       next : token => {
-        this.onError = false;
         this.errorMsg = ""
         this.connect(token)},
       error: err => {
-        this.onError = true;
         this.errorMsg= err.error.message
        }
     })

@@ -27,12 +27,18 @@
             [formControl]="password"
             required
           />
-          <ng-container *ngIf="onError">
+          <ng-container *ngIf="errorMsg">
             <p class="errorMsg" [innerHTML]="errorMsg"></p>
           </ng-container>
-          <button type="submit" [disabled]="!loginFormGroup.valid">
-            Se connecter
-          </button>
+          <div class="authButton">
+            <app-button
+              label="Se connecter"
+              color="white"
+              bgColor="rgba(119, 99, 197, 1)"
+              minWidth="15rem"
+              border="none"
+            ></app-button>
+          </div>
         </form>
       </div>
     </div>

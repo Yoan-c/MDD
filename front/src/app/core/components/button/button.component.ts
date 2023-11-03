@@ -11,6 +11,9 @@ export class ButtonComponent implements OnInit {
   @Input() isDisabled: boolean = false;
   @Input() bgColor: string = "white";
   @Input() color: string = "black";
+  @Input() border: string = "1px solid black";
+  @Input() minWidth: string = "22rem";
+  @Input() minHeght: string = "3.8rem";
   @Output() buttonEvent = new EventEmitter<string>();
   
   constructor() { }
@@ -22,6 +25,10 @@ export class ButtonComponent implements OnInit {
     return {
       'background-color': this.bgColor,
       'color' : this.color,
+      'cursor': 'pointer',
+      'border' : this.border,
+      'minWidth' : '100%',
+      'minHeight' : '100%',
 
     }
   }

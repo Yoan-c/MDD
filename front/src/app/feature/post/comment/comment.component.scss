@@ -7,10 +7,20 @@
         position: relative;
         display: flex;
         min-height: 13rem;
+
+        @media(max-width: 37.5em) {
+            flex-direction: column-reverse;
+            padding: 1rem;
+        }
     }
 
     &__user {
         width: 8rem;
+
+        @media(max-width: 37.5em) {
+            align-self: end;
+            width: auto;
+        }
 
         p {
             overflow-wrap: break-word;
@@ -22,24 +32,61 @@
         left: 9rem;
         background-color: #EEEEEE;
         width: 44.9rem;
-        min-height: 10rem;
+        min-height: 5rem;
         border-radius: 1.6rem;
         padding: 1.2rem;
+
+        @media(max-width: 56em) {
+            width: 37.9rem;
+        }
+
+        @media(max-width: 37.5em) {
+            position: initial;
+            width: auto;
+            background-color: white;
+        }
     }
 
     &__post {
         display: flex;
         align-items: center;
+
+        @media(max-width: 37.5em) {
+            position: relative;
+            right: 3.5rem;
+            width: 111%;
+        }
     }
 
     &__contain {
         margin-right: 4rem;
+
+        @media(max-width: 37.5em) {
+            margin: 0;
+            width: 100%;
+        }
 
         textarea {
             width: 66rem;
             height: 9rem;
             padding: 1rem;
             border-radius: 1.6rem;
+
+            @media(max-width: 56em) {
+                width: 37.9rem;
+            }
+
+            @media(max-width: 37.5em) {
+                width: 100%;
+                padding-right: 5rem;
+            }
+        }
+    }
+
+    &__send {
+        @media(max-width: 37.5em) {
+            position: absolute;
+            right: 0;
         }
     }
 }

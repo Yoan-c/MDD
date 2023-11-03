@@ -21,3 +21,20 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.authButton {
+    width: 16rem;
+    height: 4rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.errorMsg {
+    list-style: 1;
+    color: red;
+    font-size: 1.2rem;
+    position: relative;
+    bottom: 1rem;
+}

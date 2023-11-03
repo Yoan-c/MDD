@@ -38,6 +38,10 @@
             display: block;
             position: relative;
         }
+
+        @media(max-width: 21em) {
+            width: 20rem;
+        }
     }
 
 
@@ -65,6 +69,10 @@ form input {
     height: 3rem;
     padding: 1rem;
     margin-bottom: 2rem;
+
+    @media(max-width: 21em) {
+        width: 19rem;
+    }
 }
 
 .main__header {
@@ -73,19 +81,6 @@ form input {
     @media(max-width: 37.5em) {
         height: 20rem;
     }
-}
-
-button {
-    max-width: 16rem;
-    background-color: rgba(119, 99, 197, 1);
-    border: none;
-    border-radius: 2rem;
-    min-height: 5rem;
-    color: white;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%);
 }
 
 a,
