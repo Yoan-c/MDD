@@ -16,6 +16,9 @@
         <app-button
           [label]="user.idTopic?.includes(topic.id) ? 'Abonné' : 'S\'abonner'"
           (click)="onClick(topic.id, appButton)"
+          border="none"
+          bgColor="rgba(119, 99, 197, 1)"
+          color="white"
           #appButton
         ></app-button>
       </div>

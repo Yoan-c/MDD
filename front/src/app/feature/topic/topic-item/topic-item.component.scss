@@ -3,9 +3,17 @@
     margin-top: 4rem;
     margin-left: 4rem;
 
+    @media(max-width: 37.5em) {
+        margin-left: 0;
+    }
+
     &__card {
         display: flex;
         flex-wrap: wrap;
+
+        @media(max-width: 37.5em) {
+            justify-content: center;
+        }
     }
 }
 
