@@ -39,6 +39,10 @@
             display: block;
             position: relative;
         }
+
+        @media(max-width: 21em) {
+            width: 21rem;
+        }
     }
 
 
@@ -66,6 +70,10 @@ form input {
     height: 3rem;
     padding: 1rem;
     margin-bottom: 2rem;
+
+    @media(max-width: 21em) {
+        width: auto;
+    }
 }
 
 .main__header {
@@ -76,13 +84,10 @@ form input {
     }
 }
 
-button {
-    max-width: 16rem;
-    background-color: rgba(119, 99, 197, 1);
-    border: none;
-    border-radius: 2rem;
-    min-height: 5rem;
-    color: white;
+.registerButton {
+    width: 16rem;
+    // background-color: rgba(119, 99, 197, 1);
+    height: 4rem;
     position: relative;
     top: 50%;
     left: 50%;

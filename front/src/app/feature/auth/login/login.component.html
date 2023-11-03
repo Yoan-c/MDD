@@ -30,9 +30,16 @@
           <ng-container *ngIf="onError">
             <p class="errorMsg" [innerHTML]="errorMsg"></p>
           </ng-container>
-          <button type="submit" [disabled]="!loginFormGroup.valid">
+          <app-button
+            label="Se connecter"
+            color="white"
+            bgColor="rgba(119, 99, 197, 1)"
+            minWidth="15rem"
+            border="none"
+          ></app-button>
+          <!-- <button type="submit" [disabled]="!loginFormGroup.valid">
             Se connecter
-          </button>
+          </button> -->
         </form>
       </div>
     </div>

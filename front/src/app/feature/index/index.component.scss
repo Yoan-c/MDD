@@ -8,6 +8,13 @@
         align-items: center;
         position: relative;
         bottom: 7rem;
+
+        @media(max-width: 37.5em) {
+            justify-content: start;
+            bottom: 0;
+            top: 10%;
+
+        }
     }
 
     &__top {
@@ -15,8 +22,19 @@
         justify-content: center;
         width: 100%;
 
+        @media(max-width: 37.5em) {
+            margin-bottom: 10rem;
+        }
+
         & img {
-            max-width: 80%;
+
+            @media(max-width: 37.5em) {
+                width: 28rem;
+            }
+
+            @media(max-width: 18em) {
+                width: 20rem;
+            }
         }
     }
 
@@ -37,5 +55,11 @@
             justify-content: center;
             align-items: center;
         }
+
+        a {
+            width: 15rem;
+            margin-bottom: 4rem;
+        }
+
     }
 }
