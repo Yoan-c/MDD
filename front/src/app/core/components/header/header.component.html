@@ -18,12 +18,22 @@
       </div>
       <div class="header__logoUser">
         <img
+          *ngIf="srcImg; else imgUser"
           id="profileImg"
-          src="../../../../assets/useruserImg.png"
+          [src]="srcImg"
           alt="user image"
           (click)="goProfile()"
           #profile
         />
+        <ng-template #imgUser>
+          <img
+            id="profileImg"
+            src="../../../../assets/useruserImg.png"
+            alt="user image"
+            (click)="goProfile()"
+            #profile
+          />
+        </ng-template>
       </div>
     </div>
     <div class="header__logoMenu" (click)="displayMenu()">
