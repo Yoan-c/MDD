@@ -23,9 +23,20 @@
     left: 8.9rem;
     width: 80%;
 
+    @media(max-width: 37.5em) {
+        width: auto;
+        position: initial;
+        left: 0;
+        padding: 1rem;
+    }
+
     &__header {
         display: flex;
         flex-wrap: wrap;
+
+        @media(max-width: 37.5em) {
+            width: 26rem;
+        }
     }
 
     &__date,
@@ -39,7 +50,7 @@
 
     &__contain {
         position: relative;
-        margin-top: 4rem;
+        margin-top: 1rem;
     }
 }
 
