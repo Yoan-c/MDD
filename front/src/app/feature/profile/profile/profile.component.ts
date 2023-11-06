@@ -7,6 +7,8 @@ import { User } from 'src/app/shared/interface/user.interface';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { TopicService } from 'src/app/shared/service/topic.service';
 import { UserService } from 'src/app/shared/service/user.service';
+import { checkValidPassword } from '../../auth/validators/register.validator';
+import { UtilsService } from 'src/app/shared/service/utils.service';
 
 @Component({
   selector: 'app-profil',
@@ -23,6 +25,8 @@ export class ProfileComponent implements OnInit , OnDestroy {
   profileFormGroup = new FormGroup({});
   pseudo! : FormControl
   email! : FormControl
+  password! : FormControl
+  confirmPassword! : FormControl
   errorMsg: string = ""
   successMsg: string = ""
 
@@ -30,7 +34,7 @@ export class ProfileComponent implements OnInit , OnDestroy {
   constructor(
     private authService: AuthService,
     private userService : UserService,
-    private topicsService: TopicService,
+    private utilsService: UtilsService,
     private router: Router
   ){}
   
@@ -40,8 +44,12 @@ export class ProfileComponent implements OnInit , OnDestroy {
         this.user = user
         this.pseudo = new FormControl(this.user.pseudo, Validators.required);
         this.email = new FormControl(this.user.email, [Validators.required, Validators.email]);
+        this.password = new FormControl("");
+        this.confirmPassword = new FormControl("");
         this.profileFormGroup.addControl("pseudo", this.pseudo)
         this.profileFormGroup.addControl("email", this.email)
+        this.profileFormGroup.addControl("password", this.password)
+        this.profileFormGroup.addControl("confirmPassword", this.confirmPassword)
         return this.userService.getAllTopicByUser()
       })
     ).subscribe({
@@ -63,9 +71,19 @@ export class ProfileComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
+    console.log(this.confirmPassword);
+    
     if (this.profileFormGroup.status === "INVALID")
       return
-    this.userService.updateMe(this.pseudo.value, this.email.value).pipe(
+    if (this.checkInvalidPassword())
+      return 
+    
+    this.userService.updateMe(
+      this.pseudo.value,
+      this.email.value,
+      this.password.value,
+      this.confirmPassword.value
+      ).pipe(
       mergeMap((jwt : {token : string}) => {
         this.authService.setToken(jwt.token)
         return this.userService.getMe();
@@ -80,8 +98,24 @@ export class ProfileComponent implements OnInit , OnDestroy {
     )
   }
 
+  checkInvalidPassword() {
+    if (this.password.value === "" && this.confirmPassword.value === "")
+      return false
+    if (this.password.value === this.confirmPassword.value && this.utilsService.isPasswordValid(this.password.value))
+      return false
+    this.successMsg = ""
+    this.errorMsg = "les mots de passes doivent :<br>\
+    - être identique<br>\
+    - avoir au minimum 8 caractères<br>\
+    - avoir un caractère spécial (!@#$%^&*) <br>\
+    - avoir un chiffre<br>\
+    - avoir une majuscule<br>\
+    - avoir une minuscule"
+    return true
+  }
+
   showSuccessMsg() {
-    this.successMsg = "utilisateur modifié"
+    this.successMsg = "Utilisateur modifié"
     this.errorMsg = ""
   }
   showErrorMsg(err: { error: { message: string; }; }) {

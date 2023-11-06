@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,27 +15,30 @@ import { Router } from '@angular/router';
     ])
   ]
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   @Input() route: string = 'post';
   @ViewChild('post') post: ElementRef = new ElementRef(null);
   @ViewChild('topic') topic: ElementRef = new ElementRef(null);
-  isSlideIn: boolean = false;
+  @ViewChild('srcImg') srcImg: string = "../../../../assets/useruserImg.png";
+  isSlideIn: boolean = false; 
 
-  constructor(private router: Router) {
-   }
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.srcImg = "../../../../assets/useruserImg.png"
+    this.cdr.detectChanges();
+  }
 
   ngAfterViewInit(): void {
      if(this.route === 'post')
       this.post.nativeElement.classList.add('linkStyle');
      else if(this.route === 'topic')
       this.topic.nativeElement.classList.add('linkStyle');
-     else if(this.route === 'profile'){
-        let profileImg: HTMLImageElement = document.querySelector("#profileImg")!;
-        profileImg!.src = `../../../../assets/activeProfile.png?v=${Math.random()}`
-        
-     }
-      
+    else if(this.route === 'profile'){
+      this.srcImg = `../../../../assets/activeProfile.png`
+   }
+   this.cdr.detectChanges();
   }
 
   goPost() {

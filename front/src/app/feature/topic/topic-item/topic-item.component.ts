@@ -44,7 +44,6 @@ export class TopicItemComponent implements OnInit, OnDestroy {
       return
     this.user.idTopic?.push(id)
     appButton.label = "Abonné"
-    console.log(id);
     this.subscribe$ = this.userService.sub(id).pipe(
       mergeMap(_ => {return this.userService.getMe()})
       ).subscribe();

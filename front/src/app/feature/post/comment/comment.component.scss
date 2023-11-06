@@ -84,6 +84,8 @@
     }
 
     &__send {
+        cursor: pointer;
+
         @media(max-width: 37.5em) {
             position: absolute;
             right: 0;

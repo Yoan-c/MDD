@@ -1,11 +1,14 @@
-<app-header route="profile"></app-header>
+<app-header
+  route="profile"
+  srcImg="../../../../assets/activeProfile.png"
+></app-header>
 <div class="main">
   <div class="profile">
     <div class="profile__title">
       <p>Profil utilisateur</p>
     </div>
     <div class="profile__form">
-      <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+      <p class="error" *ngIf="errorMsg" [innerHtml]="errorMsg"></p>
       <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
       <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()" class="form">
         <div class="form__group">
@@ -13,6 +16,18 @@
         </div>
         <div class="form__group">
           <input type="email" [formControl]="email" required />
+        </div>
+        <div class="form__group">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" [formControl]="password" />
+        </div>
+        <div class="form__group">
+          <label for="confirmPassword">Confirmation mot de passe</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            [formControl]="confirmPassword"
+          />
         </div>
         <div class="form__group">
           <div class="saveButton">

@@ -17,6 +17,9 @@ export class PostItemComponent implements OnInit, OnDestroy{
   post$! : Subscription
   postItem! : PostItem[]
   user!: User | null;
+  sortPostAsc : boolean = true;
+  arrow: string = "&#x2B73;"
+
   constructor(
     private postService : PostService,
     private errorApp : ErrorApp,
@@ -42,5 +45,26 @@ export class PostItemComponent implements OnInit, OnDestroy{
   create(label : string) {
     if (label.includes("Créer"))
       this.router.navigate(['post/create'])
+  }
+
+  sortPost(){
+
+    if (this.sortPostAsc){
+      this.sortPostAsc = !this.sortPostAsc
+      this.postItem = this.postItem.sort(this.sortPostByCreatedDesc)
+      this.arrow = "&#x2B71;"
+      return
+    }
+    this.arrow = "&#x2B73;"
+    this.sortPostAsc = !this.sortPostAsc
+    this.postItem = this.postItem.sort(this.sortPostByCreatedAsc)
+  }
+
+  sortPostByCreatedAsc(postItem : PostItem, newPostItem : PostItem) {
+    return new Date(newPostItem.created_at!).getTime() - new Date(postItem.created_at!).getTime()
+  }
+
+  sortPostByCreatedDesc(postItem : PostItem, newPostItem : PostItem) {
+    return new Date(postItem.created_at!).getTime() - new Date(newPostItem.created_at!).getTime()
   }
 }

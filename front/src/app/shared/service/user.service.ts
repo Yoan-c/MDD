@@ -41,9 +41,9 @@ export class UserService {
         return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
     }
 
-    updateMe(pseudo: string, email: string): Observable<{token : string}>{
+    updateMe(pseudo: string, email: string, password: string, confirmPassword: string): Observable<{token : string}>{
         const user = {
-            pseudo, email
+            pseudo, email, password, confirmPassword
         }
         return this.http.patch<{token : string}>(`${this.apiUrl}/me`, user)
     }
