@@ -1,25 +1,35 @@
-# P6-Full-Stack-reseau-dev
+# Projet MDD
+
+## Context
+
+Creates the back end and front end of the MDD application. This application allows you to :
+
+- create and consult post
+- view the news feed
+- comment on a post
+- subscribe or unsubscribe to a topic
+- modify your profile
 
 ## Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+This project was generated with [Angular CLI](https://angular.io/cli) version 16.2.11.
 
 Don't forget to install your node_modules before starting (`npm install`).
 
-### Development server
+## Back
+
+This project is develop in Java version 17
+
+Don't forget to download maven dependencies
+
+### Development front server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-### Build
+### Development back server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `MddApiApplication` with your IDE command or maven command. Go to `http://localhost:8080/api` with postman or `http://localhost:8080/documentation` for API documentation. Please note that the application must be installed and running to access the documentation.
 
 ### Where to start
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
-
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
-
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
-
-Good luck!
+Install the back end first, then the front end.
