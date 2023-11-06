@@ -12,14 +12,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.url.includes('login') || req.url.includes('register'))
-            return next.handle(req)
+            return next.handle(req);
         const token = this.authService.getToken();
         req = req.clone({
             setHeaders : {
                 Authorization: 'Bearer ' + token
             }
         })
-        return next.handle(req)
+        return next.handle(req);
     }
     
 }

@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.entity.Post;
-import com.openclassrooms.mddapi.entityDto.CommentDTO;
 import com.openclassrooms.mddapi.entityDto.PostDTO;
 import com.openclassrooms.mddapi.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,5 +101,4 @@ public class PostController {
     public Post createPost(@Valid @RequestBody PostDTO postDTO){
         return postService.createPost(postDTO);
     }
-
 }

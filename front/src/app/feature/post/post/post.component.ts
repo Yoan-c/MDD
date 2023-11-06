@@ -14,8 +14,8 @@ import { Topic } from 'src/app/shared/interface/topic.interface';
 export class PostComponent implements OnInit, OnDestroy {
   
   postItem!: PostItem;
-  postItem$! : Subscription
-  topic!: Topic
+  postItem$! : Subscription;
+  topic!: Topic;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,11 +27,11 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.postItem$ = this.route.queryParams.pipe(
       mergeMap(param => {
-        return this.postService.getPostById(param['id'])
+        return this.postService.getPostById(param['id']);
       }),
       mergeMap(post => {
-        this.postItem = post        
-        return this.topicService.getTopicById(post.idTopic!)
+        this.postItem = post;      
+        return this.topicService.getTopicById(post.idTopic!);
       })
     ).subscribe({
       next: (topic : Topic) => this.topic = topic
@@ -41,6 +41,5 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.postItem$.unsubscribe();
   }
-
 
 }

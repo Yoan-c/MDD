@@ -6,7 +6,6 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entityDto.CommentDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.CommentRepository;
-import com.openclassrooms.mddapi.repository.TopicRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostService postService;
-
     private final UserService userService;
 
     public CommentService(CommentRepository cr, PostService ps, UserService us){

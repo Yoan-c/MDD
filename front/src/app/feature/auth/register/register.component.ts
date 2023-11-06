@@ -15,8 +15,8 @@ export class RegisterComponent implements OnInit, OnDestroy  {
 
   onError = false;
   errorMsg = '';
-  register$!: Subscription
-  registerForm!: FormGroup
+  register$!: Subscription;
+  registerForm!: FormGroup;
   pseudo = new FormControl(this.registerForm, Validators.required);
   email = new FormControl(this.registerForm, [Validators.required, Validators.email]);
   password = new FormControl(
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
       email: '',
       pseudo: '',
       password: ''
-    }
+    };
 
   constructor(private registerService : RegisterService, private router : Router){}
 
@@ -38,33 +38,33 @@ export class RegisterComponent implements OnInit, OnDestroy  {
       pseudo : this.pseudo,
       email : this.email,
       password : this.password
-    })
+    });
   }
 
   ngOnDestroy(): void {
     if (this.register$)
-      this.register$.unsubscribe()
+      this.register$.unsubscribe();
   }
 
   onSubmit() {
     if (this.registerForm.status === "INVALID"){
-      this.showError()
+      this.showError();
       return
     }
     this.errorMsg = "";
     this.onError = false;
-    this.registerUser.email = this.email.value
-    this.registerUser.pseudo = this.pseudo.value
-    this.registerUser.password = this.password.value
+    this.registerUser.email = this.email.value;
+    this.registerUser.pseudo = this.pseudo.value;
+    this.registerUser.password = this.password.value;
     this.register$ = this.registerService.register(this.registerUser).subscribe(
       {
         next : _ => {
-          this.errorMsg="",
+          this.errorMsg="";
           this.onError = false;
-          this.router.navigate(['/login'])
+          this.router.navigate(['/login']);
         },
         error : err => {
-          this.errorMsg = `erreur : ${err.error.message}`
+          this.errorMsg = `erreur : ${err.error.message}`;
           this.onError = true;
         }
       }
@@ -72,21 +72,20 @@ export class RegisterComponent implements OnInit, OnDestroy  {
   }
 
   showError(){
-    console.log(this.registerForm);
     this.onError = true;
-    this.errorMsg = "erreur : "
+    this.errorMsg = "erreur : ";
     const controls = this.registerForm.controls;
     if  (controls['pseudo'].errors)
-      this.errorMsg += "Veuillez entrer un pseudo"
+      this.errorMsg += "Veuillez entrer un pseudo";
     else if  (controls['email'].errors)
-      this.errorMsg += "Veuillez entrer un email valide"
+      this.errorMsg += "Veuillez entrer un email valide";
     else if  (controls['password'].errors)
       this.errorMsg += "Le mot de passe doit contenir : <br> \
         - 8 caractères minimum <br>\
         - une minuscule <br>\
         - une majuscule <br>\
         - un chiffre <br> \
-        - une caractère spécial (!@#$%^&*)"
+        - une caractère spécial (!@#$%^&*)";
   }
 
 }

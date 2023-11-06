@@ -11,7 +11,7 @@ export class RegisterService {
     private apiUrl = 'http://localhost:8080/api/auth'
 
     register(register : Register): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/register`, register)
+        return this.http.post<void>(`${this.apiUrl}/register`, register);
     }
 
 }

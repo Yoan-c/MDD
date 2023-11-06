@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.validation.annotation.Validated;
-
 import java.util.Date;
 
 @Document
@@ -30,6 +29,4 @@ public class Comment {
     private Date created_at;
     @LastModifiedDate
     private Date updated_at;
-
-
 }

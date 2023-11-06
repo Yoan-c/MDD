@@ -15,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 import java.util.Set;
 
@@ -27,7 +26,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final Validator validator;
     private final AuthenticationManager authenticationManager;
-
     private final JwtService jwtService;
 
     public AuthService( UserRepository ur,
@@ -79,7 +77,6 @@ public class AuthService {
             throw new BadCredentialsException("Identifant / mot de passe incorrect");
         }
         return jwtService.generateToken(user.get());
-
     }
 
     public String checkLoginUser(String id){

@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CommentService } from '../service/comment.service';
-import { Subscription, mergeMap, tap } from 'rxjs';
+import { Subscription, mergeMap} from 'rxjs';
 import { Comment } from '../interface/comment.interface';
 import { UserService } from 'src/app/shared/service/user.service';
 import { User } from 'src/app/shared/interface/user.interface';
@@ -15,8 +14,8 @@ export class CommentComponent implements OnInit, OnDestroy{
 
   @Input() idPost!: string;
   @ViewChild('commentContain') commentContain: ElementRef | undefined;
-  comments: Comment[] = []
-  comments$!: Subscription
+  comments: Comment[] = [];
+  comments$!: Subscription;
   comment: Comment = {};
   onError : Boolean = false;
   user!: User;
@@ -29,33 +28,32 @@ export class CommentComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
      this.comments$ =  this.userService.user$.pipe(
       mergeMap(user => {
-        this.user = user
-        return this.commentService.getCommentByIdTopic(this.idPost)
+        this.user = user;
+        return this.commentService.getCommentByIdTopic(this.idPost);
       })
      )
      .subscribe({
       next : (comments) => this.comments = comments
-     })
+     });
   }
 
   ngOnDestroy(): void {
-    this.comments$.unsubscribe()
+    this.comments$.unsubscribe();
   }
 
   onClick() {
     if (!this.commentContain?.nativeElement.value)
-      return
+      return;
     this.comment.comment = this.commentContain?.nativeElement.value;
     this.comment.idPost = this.idPost;
-    this.comment.idUser = this.user.pseudo
+    this.comment.idUser = this.user.pseudo;
     this.commentService.postComment(this.comment).subscribe({
       next: () => {
-        this.comments.push(this.comment)
-        this.comment = {}
-        this.commentContain!.nativeElement.value = ""
+        this.comments.push(this.comment);
+        this.comment = {};
+        this.commentContain!.nativeElement.value = "";
       },
-      error: (err) => this.onError = true
-    })
+      error: () => this.onError = true
+    });
   }
-
 }

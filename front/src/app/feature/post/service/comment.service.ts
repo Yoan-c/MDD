@@ -11,12 +11,10 @@ export class CommentService {
     private apiUrl = 'http://localhost:8080/api'
 
     getCommentByIdTopic(idComment: string): Observable<Comment[]>{
-        return this.http.get<Comment[]>(`${this.apiUrl}/comment/${idComment}`)
+        return this.http.get<Comment[]>(`${this.apiUrl}/comment/${idComment}`);
     }
 
     postComment(comment: Comment): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/comment`, comment)
+        return this.http.post<void>(`${this.apiUrl}/comment`, comment);
     }
-
-
 }

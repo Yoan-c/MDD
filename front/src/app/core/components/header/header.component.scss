@@ -31,7 +31,6 @@
         img {
             width: 14rem;
             height: 8.1rem;
-
         }
     }
 
@@ -41,7 +40,6 @@
 
     &__right {
         display: flex;
-
     }
 
     &__menu {
@@ -52,7 +50,6 @@
             position: relative;
             top: 10rem;
         }
-
     }
 
     ul {
@@ -77,8 +74,6 @@
         & li {
             cursor: pointer;
         }
-
-
     }
 }
 
@@ -100,7 +95,6 @@
         width: 20rem;
         z-index: 2;
         background-color: white;
-        // display: none;
         opacity: 0;
         z-index: -1;
     }

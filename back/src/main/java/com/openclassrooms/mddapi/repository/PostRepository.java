@@ -9,6 +9,5 @@ import java.util.ArrayList;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
     Boolean existsByTitle(@NotBlank String title);
-
     ArrayList<Post> findAllByIdTopic(@NotBlank String idTopic);
 }

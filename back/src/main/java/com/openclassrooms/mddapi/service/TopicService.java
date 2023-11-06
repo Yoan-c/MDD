@@ -17,7 +17,6 @@ import java.util.Set;
 public class TopicService {
 
     private final TopicRepository topicRepository;
-
     private final Validator validator;
 
     public TopicService(TopicRepository tr, Validator val){

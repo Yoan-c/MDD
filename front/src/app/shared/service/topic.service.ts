@@ -10,13 +10,13 @@ export class TopicService {
 
     constructor(private http: HttpClient){}
 
-    private apiUrl = 'http://localhost:8080/api'
+    private apiUrl = 'http://localhost:8080/api';
 
     getTopic(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
+        return this.http.get<Topic[]>(`${this.apiUrl}/topic`);
     }
 
     getTopicById(id : string): Observable<Topic> {
-        return this.http.get<Topic>(`${this.apiUrl}/topic/${id}`)
+        return this.http.get<Topic>(`${this.apiUrl}/topic/${id}`);
     }
 }

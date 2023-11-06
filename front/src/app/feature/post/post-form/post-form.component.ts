@@ -16,7 +16,7 @@ import { User } from 'src/app/shared/interface/user.interface';
 })
 export class PostFormComponent implements OnInit, OnDestroy {
   
-  topic!: Topic[]
+  topic!: Topic[];
   topic$!: Subscription;
   post$!: Subscription;
   postFormGroup = new FormGroup({});
@@ -30,17 +30,16 @@ export class PostFormComponent implements OnInit, OnDestroy {
     private topicService: TopicService,
     private postService : PostService,
     private router : Router,
-    private userService: UserService
   ){}
   
   ngOnInit(): void {
-    this.postFormGroup.addControl('theme', this.theme)
-    this.postFormGroup.addControl('title', this.postTitle)
-    this.postFormGroup.addControl('contain', this.postContain)
+    this.postFormGroup.addControl('theme', this.theme);
+    this.postFormGroup.addControl('title', this.postTitle);
+    this.postFormGroup.addControl('contain', this.postContain);
 
     this.topic$ = this.topicService.getTopic().pipe(
       tap(tabTopic => this.topic = tabTopic)
-    ).subscribe()
+    ).subscribe();
 
   }
   ngOnDestroy(): void {
@@ -50,8 +49,6 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    console.log(this.user);
-    
     this.post.title = this.postTitle.value!;
     this.post.post = this.postContain.value!;
     this.post.idTopic = this.theme.value!;
@@ -61,10 +58,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
     if (this.postFormGroup.valid){
       this.post$ = this.postService.create(this.post).subscribe({
         next : () => this.router.navigate(['/post'])
-      })
-      console.log(this.post);
+      });
     }
   }
-
- 
 }

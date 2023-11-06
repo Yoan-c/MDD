@@ -6,17 +6,11 @@ import com.openclassrooms.mddapi.entityDto.UserDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,15 +19,12 @@ import java.util.regex.Pattern;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
-
     private final JwtService jwtService;
     private final TopicService topicService;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository ur, TopicService ts, JwtService js, PasswordEncoder ps) {
         this.userRepository = ur;
-        this.modelMapper = new ModelMapper();
         this.jwtService = js;
         this.topicService = ts;
         this.passwordEncoder = ps;
@@ -62,12 +53,20 @@ public class UserService {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = Optional.ofNullable(userRepository.findUserByEmail(email).orElseThrow(() ->
                 new ApiCustomError("Utilisateur inexistant", HttpStatus.NOT_FOUND)));
-        if (user.isPresent()) {
-            UserDTO userDTO = modelMapper.map(user.get(), UserDTO.class);
-            log.info(user.get().toString());
-            return userDTO;
-        }
-        return null;
+        return user.map(this::initUserDTO).orElse(null);
+    }
+
+    public UserDTO initUserDTO(User user){
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPseudo(user.getPseudo());
+        userDTO.setIdComment(user.getIdComment());
+        userDTO.setIdPost(user.getIdPost());
+        userDTO.setIdTopic(user.getIdTopic());
+        userDTO.setCreated_at(user.getCreated_at());
+        userDTO.setUpdated_at(user.getUpdated_at());
+        return userDTO;
     }
 
     public String updateMe(HashMap<String, String> userInfo) {

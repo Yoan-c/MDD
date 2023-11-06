@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
   animations: [
     trigger('slideAnimation', [
-      state('void', style({ transform: 'translateX(-100%)',opacity: 0, 'z-index': 0 })), // État initial
-      state('slide-in', style({ transform: 'translateX(0)', opacity: 1, 'z-index': 1 })), // État final
-      transition('void => slide-in', animate('1s')), // Transition pour l'entrée
-      transition('slide-in => void', animate('1s')), // Transition pour la sortie
+      state('void', style({ transform: 'translateX(-100%)',opacity: 0, 'z-index': 0 })),
+      state('slide-in', style({ transform: 'translateX(0)', opacity: 1, 'z-index': 1 })),
+      transition('void => slide-in', animate('1s')),
+      transition('slide-in => void', animate('1s')),
     ])
   ]
 })
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.srcImg = "../../../../assets/useruserImg.png"
+    this.srcImg = "../../../../assets/useruserImg.png";
     this.cdr.detectChanges();
   }
 
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
      else if(this.route === 'topic')
       this.topic.nativeElement.classList.add('linkStyle');
     else if(this.route === 'profile'){
-      this.srcImg = `../../../../assets/activeProfile.png`
+      this.srcImg = `../../../../assets/activeProfile.png`;
    }
    this.cdr.detectChanges();
   }
@@ -54,9 +54,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   displayMenu(){
-    // let menu = document.querySelector("#menuMobile")!;
-    // console.log(menu);
-    // menu.classList.add('slide-in')
     this.isSlideIn = true;
   }
 }

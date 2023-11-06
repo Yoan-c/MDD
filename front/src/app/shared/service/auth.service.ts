@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
@@ -8,9 +8,9 @@ import { Observable } from "rxjs";
 })
 export class AuthService {
     private isAuthenticate = false;
-    private apiUrl = 'http://localhost:8080/api/auth'
+    private apiUrl = 'http://localhost:8080/api/auth';
 
-    constructor(private http : HttpClient, private router : Router){}
+    constructor(private http : HttpClient){}
 
     getIsAuthenticated(){
         return this.isAuthenticate;
@@ -36,8 +36,8 @@ export class AuthService {
 
     logout(): Observable<void> {
         localStorage.removeItem('jwt');
-        localStorage.removeItem('user')
-        return this.http.get<void>(`${this.apiUrl}/logout`)
+        localStorage.removeItem('user');
+        return this.http.get<void>(`${this.apiUrl}/logout`);
     }
 
     login(token : string) {

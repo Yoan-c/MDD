@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 import { Login } from '../interface/login.interface';
 import { LoginService } from '../service/login.service';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { UserService } from 'src/app/shared/service/user.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  login$!: Subscription
+  login$!: Subscription;
   pseudo = new FormControl("");
   password = new FormControl("");
   loginFormGroup = new FormGroup({});
@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loginFormGroup.addControl('ID', this.pseudo )
-    this.loginFormGroup.addControl('password', this.password )
+    this.loginFormGroup.addControl('ID', this.pseudo);
+    this.loginFormGroup.addControl('password', this.password);
     this.loginUser = {email : "", password: ""};
   }
 
@@ -41,27 +41,25 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(){
     if (this.loginFormGroup.status === 'INVALID'){
-      
-      this.errorMsg= "erreur : Vérifier les différents champs"
-      return
+      this.errorMsg= "erreur : Vérifier les différents champs";
+      return;
     }
     this.loginUser.email = this.pseudo.value!;
-    this.loginUser.password = this.password.value!
+    this.loginUser.password = this.password.value!;
     this.login$ = this.loginService.login(this.loginUser).subscribe({
       next : token => {
-        this.errorMsg = ""
+        this.errorMsg = "";
         this.connect(token)},
       error: err => {
-        this.errorMsg= err.error.message
+        this.errorMsg= err.error.message;
        }
     })
   }
 
   connect(jwt : {token : string}) : void {
-    this.authService.login(jwt.token)
+    this.authService.login(jwt.token);
     this.userService.getMe().subscribe({
       next : token => this.router.navigate(['/post'])
     });
-
   }
 }

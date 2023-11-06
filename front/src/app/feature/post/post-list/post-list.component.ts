@@ -14,7 +14,7 @@ export class PostListComponent {
   constructor(private router: Router){}
 
   onClick() {
-    this.router.navigate(['/post/post'], {queryParams : {id : this.postItem?.id}})
+    this.router.navigate(['/post/post'], {queryParams : {id : this.postItem?.id}});
   }
   
 }

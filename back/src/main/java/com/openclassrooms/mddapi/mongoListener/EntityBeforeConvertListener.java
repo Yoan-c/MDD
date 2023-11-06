@@ -7,7 +7,6 @@ import com.openclassrooms.mddapi.entity.User;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,14 +16,12 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
     public void onBeforeConvert(BeforeConvertEvent<T> event) {
         T entity = event.getSource();
         Date currentDate = new Date();
-
         if (entity instanceof Comment){
             updateDateOfComment((Comment) entity, currentDate);
         }
         else if (entity instanceof Post){
             updateDateOfArticle((Post) entity, currentDate);
             initPostList((Post) entity);
-
         }
         else if (entity instanceof User){
             updateDateOfUser((User) entity, currentDate);
@@ -33,7 +30,6 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         else if (entity instanceof Topic){
             updateDateOfTheme((Topic) entity, currentDate);
         }
-
     }
 
     private void initPostList(Post post) {
@@ -76,5 +72,4 @@ public class EntityBeforeConvertListener<T> extends AbstractMongoEventListener<T
         }
         topic.setUpdated_at(currentDate);
     }
-
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../interface/user.interface";
-import { BehaviorSubject, Observable, of, tap } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
 import { Topic } from "../interface/topic.interface";
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Topic } from "../interface/topic.interface";
 })
 export class UserService {
 
-    private apiUrl = 'http://localhost:8080/api/user'
+    private apiUrl = 'http://localhost:8080/api/user';
     private userSubject = new BehaviorSubject<User>({});
     user$ = this.userSubject.asObservable();
     
@@ -23,28 +23,28 @@ export class UserService {
     getMe(): Observable<User> {
         return this.http.get<User>(`${this.apiUrl}/me`).pipe(
             tap(user => {
-                this.userSubject.next(user)
-                localStorage.setItem('user', JSON.stringify(user))
+                this.userSubject.next(user);
+                localStorage.setItem('user', JSON.stringify(user));
             })
         )
     }
 
     sub(id: string): Observable<void> {
-        return this.http.patch<void>(`${this.apiUrl}/sub/${id}`, "")
+        return this.http.patch<void>(`${this.apiUrl}/sub/${id}`, "");
     }
 
     unSubscribeUser(id: string): Observable<void> {
-        return this.http.patch<void>(`${this.apiUrl}/unsub/${id}`, "")
+        return this.http.patch<void>(`${this.apiUrl}/unsub/${id}`, "");
     }
 
     getAllTopicByUser(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(`${this.apiUrl}/topic`)
+        return this.http.get<Topic[]>(`${this.apiUrl}/topic`);
     }
 
     updateMe(pseudo: string, email: string, password: string, confirmPassword: string): Observable<{token : string}>{
         const user = {
             pseudo, email, password, confirmPassword
-        }
-        return this.http.patch<{token : string}>(`${this.apiUrl}/me`, user)
+        };
+        return this.http.patch<{token : string}>(`${this.apiUrl}/me`, user);
     }
 }

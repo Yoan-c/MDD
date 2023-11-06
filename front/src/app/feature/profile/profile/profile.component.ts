@@ -5,9 +5,7 @@ import { Subscription, mergeMap } from 'rxjs';
 import { Topic } from 'src/app/shared/interface/topic.interface';
 import { User } from 'src/app/shared/interface/user.interface';
 import { AuthService } from 'src/app/shared/service/auth.service';
-import { TopicService } from 'src/app/shared/service/topic.service';
 import { UserService } from 'src/app/shared/service/user.service';
-import { checkValidPassword } from '../../auth/validators/register.validator';
 import { UtilsService } from 'src/app/shared/service/utils.service';
 
 @Component({
@@ -17,20 +15,19 @@ import { UtilsService } from 'src/app/shared/service/utils.service';
 })
 export class ProfileComponent implements OnInit , OnDestroy {
 
-  auth$!: Subscription
-  user$!: Subscription
+  auth$!: Subscription;
+  user$!: Subscription;
   unSubTopics$!: Subscription;
-  topics!: Topic[]
-  user!: User
+  topics!: Topic[];
+  user!: User;
   profileFormGroup = new FormGroup({});
-  pseudo! : FormControl
-  email! : FormControl
-  password! : FormControl
-  confirmPassword! : FormControl
-  errorMsg: string = ""
-  successMsg: string = ""
+  pseudo! : FormControl;
+  email! : FormControl;
+  password! : FormControl;
+  confirmPassword! : FormControl;
+  errorMsg: string = "";
+  successMsg: string = "";
 
-  
   constructor(
     private authService: AuthService,
     private userService : UserService,
@@ -41,20 +38,20 @@ export class ProfileComponent implements OnInit , OnDestroy {
   ngOnInit(): void {
     this.user$ = this.userService.user$.pipe(
       mergeMap(user => {
-        this.user = user
+        this.user = user;
         this.pseudo = new FormControl(this.user.pseudo, Validators.required);
         this.email = new FormControl(this.user.email, [Validators.required, Validators.email]);
         this.password = new FormControl("");
         this.confirmPassword = new FormControl("");
-        this.profileFormGroup.addControl("pseudo", this.pseudo)
-        this.profileFormGroup.addControl("email", this.email)
-        this.profileFormGroup.addControl("password", this.password)
-        this.profileFormGroup.addControl("confirmPassword", this.confirmPassword)
-        return this.userService.getAllTopicByUser()
+        this.profileFormGroup.addControl("pseudo", this.pseudo);
+        this.profileFormGroup.addControl("email", this.email);
+        this.profileFormGroup.addControl("password", this.password);
+        this.profileFormGroup.addControl("confirmPassword", this.confirmPassword);
+        return this.userService.getAllTopicByUser();
       })
     ).subscribe({
       next : topics => this.topics = topics
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -71,12 +68,10 @@ export class ProfileComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.confirmPassword);
-    
     if (this.profileFormGroup.status === "INVALID")
-      return
+      return;
     if (this.checkInvalidPassword())
-      return 
+      return ;
     
     this.userService.updateMe(
       this.pseudo.value,
@@ -85,13 +80,13 @@ export class ProfileComponent implements OnInit , OnDestroy {
       this.confirmPassword.value
       ).pipe(
       mergeMap((jwt : {token : string}) => {
-        this.authService.setToken(jwt.token)
+        this.authService.setToken(jwt.token);
         return this.userService.getMe();
       })
     ).subscribe(
       {
         next : user => { this.user = user;
-          this.showSuccessMsg()
+          this.showSuccessMsg();
         },
         error : err => this.showErrorMsg(err)
       }
@@ -100,9 +95,9 @@ export class ProfileComponent implements OnInit , OnDestroy {
 
   checkInvalidPassword() {
     if (this.password.value === "" && this.confirmPassword.value === "")
-      return false
+      return false;
     if (this.password.value === this.confirmPassword.value && this.utilsService.isPasswordValid(this.password.value))
-      return false
+      return false;
     this.successMsg = ""
     this.errorMsg = "les mots de passes doivent :<br>\
     - être identique<br>\
@@ -110,30 +105,29 @@ export class ProfileComponent implements OnInit , OnDestroy {
     - avoir un caractère spécial (!@#$%^&*) <br>\
     - avoir un chiffre<br>\
     - avoir une majuscule<br>\
-    - avoir une minuscule"
-    return true
+    - avoir une minuscule";
+    return true;
   }
 
   showSuccessMsg() {
-    this.successMsg = "Utilisateur modifié"
-    this.errorMsg = ""
+    this.successMsg = "Utilisateur modifié";
+    this.errorMsg = "";
   }
   showErrorMsg(err: { error: { message: string; }; }) {
-    this.successMsg = ""
-    this.errorMsg = err.error.message
+    this.successMsg = "";
+    this.errorMsg = err.error.message;
   }
 
   unSubscribeUser(id : string) : void {
     this.unSubTopics$ = this.userService.unSubscribeUser(id).pipe(
       mergeMap(() => {
-        this.removeTopic(id)
-        return this.userService.getMe()
+        this.removeTopic(id);
+        return this.userService.getMe();
       })
     ).subscribe();
   }
 
   removeTopic(id : string) {
-    this.topics = this.topics.filter(topic => topic.id !== id)
+    this.topics = this.topics.filter(topic => topic.id !== id);
   }
-
 }

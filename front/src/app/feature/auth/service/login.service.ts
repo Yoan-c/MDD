@@ -12,7 +12,7 @@ export class LoginService {
     private apiUrl = 'http://localhost:8080/api/auth'
 
     login(login: Login): Observable<{token : string}> {
-        return this.http.post<{token : string}>(`${this.apiUrl}/login`, login)
+        return this.http.post<{token : string}>(`${this.apiUrl}/login`, login);
     }
 
 }

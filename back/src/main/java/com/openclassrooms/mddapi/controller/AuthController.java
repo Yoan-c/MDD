@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entityDto.Login;
 import com.openclassrooms.mddapi.entityDto.Register;
 import com.openclassrooms.mddapi.service.AuthService;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 
 @RestController
@@ -36,7 +34,6 @@ public class AuthController {
     })
     @PostMapping("/register")
     public ResponseEntity<HashMap<String, String>> register(@Valid @RequestBody Register request){
-
         HashMap<String, String> token = new HashMap<>();
         authService.register(request);
         return new ResponseEntity<>(token, HttpStatus.OK);
@@ -54,7 +51,6 @@ public class AuthController {
     })
     @PostMapping("/login")
     public ResponseEntity<HashMap<String, String>> login(@Valid @RequestBody Login login){
-
         HashMap<String, String> token = new HashMap<>();
         token.put("token", authService.login(login));
         return new ResponseEntity<>(token, HttpStatus.OK);

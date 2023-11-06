@@ -9,10 +9,10 @@ export class ErrorApp {
 
     checkError(err : any){
         if (err.status === 401)
-            this.redirect('/login')
+            this.redirect('/login');
     }
 
     redirect(url : string) {
-        this.router.navigate(['/'   ])
+        this.router.navigate(['/']);
     }
 }
