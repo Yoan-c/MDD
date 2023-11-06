@@ -4,11 +4,11 @@
 
 Creates the back end and front end of the MDD application. This application allows you to :
 
-- create and consult post
-- view the news feed
-- comment on a post
-- subscribe or unsubscribe to a topic
-- modify your profile
+- Create and consult post
+- View the news feed
+- Comment on a post
+- Subscribe or unsubscribe to a topic
+- Modify your profile
 
 ## Front
 
@@ -32,7 +32,8 @@ Run `MddApiApplication` with your IDE command or maven command. Go to `http://lo
 
 ### Where to start
 
-Install the back end first, then the front end.
+- Clone this project with `git clone` command and follow steps in back folder README and front folder README
+- Install the back end first, then the front end.
 
 ## Author
 
