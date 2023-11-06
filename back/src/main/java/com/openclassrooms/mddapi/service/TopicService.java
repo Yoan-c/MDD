@@ -1,18 +1,14 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.Topic;
-import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.entityDto.Login;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.TopicRepository;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
 

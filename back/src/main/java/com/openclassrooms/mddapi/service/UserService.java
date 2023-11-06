@@ -90,7 +90,9 @@ public class UserService {
     public String updateUser(HashMap<String, String> userInfo, User user){
         user.setPseudo(userInfo.get("pseudo"));
         user.setEmail(userInfo.get("email"));
-        if (userInfo.containsKey("password") && userInfo.containsKey("confirmPassword"))
+        if (userInfo.containsKey("password") &&
+                userInfo.containsKey("confirmPassword") &&
+                !userInfo.get("password").isEmpty())
             user.setPassword(checkPassword(userInfo.get("password"), userInfo.get("confirmPassword")));
         this.saveUser(user);
         return jwtService.generateToken(user);

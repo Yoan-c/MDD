@@ -31,8 +31,9 @@ public class SecurityConfig {
                 .and()
                 .csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> auth
-                        .antMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
-                        .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement( session -> session
@@ -44,4 +45,13 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    private static final String[] AUTH_WHITELIST = {
+            "/v3/api-docs/**",
+            "/v3/api-doc.yaml",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/documentation",
+            "/documentation-api"
+    };
 }

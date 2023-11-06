@@ -5,6 +5,8 @@ import com.openclassrooms.mddapi.entityDto.Login;
 import com.openclassrooms.mddapi.entityDto.Register;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +16,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.util.Optional;
 import java.util.Set;
 
@@ -81,10 +81,6 @@ public class AuthService {
         return jwtService.generateToken(user.get());
 
     }
-    public boolean checkValidationObject(Register register) {
-        Set<ConstraintViolation<Register>> violations = validator.validate(register);
-        return violations.isEmpty();
-    }
 
     public String checkLoginUser(String id){
         Optional<User> userByEmail = userRepository.findUserByEmail(id);
@@ -99,6 +95,10 @@ public class AuthService {
         throw new ApiCustomError("Identifant / mot de passe incorrect", HttpStatus.BAD_REQUEST);
     }
 
+    public boolean checkValidationObject(Register register) {
+        Set<ConstraintViolation<Register>> violations = validator.validate(register);
+        return violations.isEmpty();
+    }
     public boolean checkValidationObject(Login login) {
         Set<ConstraintViolation<Login>> violations = validator.validate(login);
         return violations.isEmpty();

@@ -39,15 +39,20 @@ public class CommentService {
         if (!postService.isPostExist(commentDTO.getIdPost()))
             throw new ApiCustomError("L'article n'existe pas", HttpStatus.BAD_REQUEST);
         User user = userService.getUserByContext();
-        comment.setIdPost(commentDTO.getIdPost());
-        comment.setComment(commentDTO.getComment());
-        comment.setIdUser(user.getPseudo());
+        comment = initComment(commentDTO, comment, user);
         Comment newComment = commentRepository.save(comment);
         user.getIdComment().add(newComment.getId());
         userService.saveUser(user);
         Post post = postService.getPostById(commentDTO.getIdPost());
         post.getIdComment().add(newComment.getId());
         postService.savePost(post);
+        return comment;
+    }
+
+    public Comment initComment(CommentDTO commentDTO, Comment comment, User user){
+        comment.setIdPost(commentDTO.getIdPost());
+        comment.setComment(commentDTO.getComment());
+        comment.setIdUser(user.getPseudo());
         return comment;
     }
 }

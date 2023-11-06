@@ -8,7 +8,6 @@ import com.openclassrooms.mddapi.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -45,13 +44,18 @@ public class PostService {
             throw new ApiCustomError("Le thème n'existe pas", HttpStatus.BAD_REQUEST);
         Post post = new Post();
         User user = userService.getUserByContext();
+        post = initPost(postDTO, post, user);
+        Post newPost = postRepository.insert(post);
+        user.getIdPost().add(newPost.getId());
+        userService.saveUser(user);
+        return post;
+    }
+
+    public Post initPost(PostDTO postDTO, Post post, User user){
         post.setPost(postDTO.getPost());
         post.setTitle(postDTO.getTitle());
         post.setIdTopic(postDTO.getIdTopic());
         post.setIdUser(user.getPseudo());
-        Post newPost = postRepository.insert(post);
-        user.getIdPost().add(newPost.getId());
-        userService.saveUser(user);
         return post;
     }
 
