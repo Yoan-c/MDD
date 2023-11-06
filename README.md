@@ -33,3 +33,7 @@ Run `MddApiApplication` with your IDE command or maven command. Go to `http://lo
 ### Where to start
 
 Install the back end first, then the front end.
+
+## Author
+
+Yoan-c
