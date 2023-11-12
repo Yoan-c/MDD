@@ -28,13 +28,13 @@
     }
 
     &__show {
-        position: absolute;
-        left: 9rem;
+        position: relative;
         background-color: #EEEEEE;
         width: 44.9rem;
         min-height: 5rem;
         border-radius: 1.6rem;
         padding: 1.2rem;
+        margin-bottom: 4rem;
 
         @media(max-width: 56em) {
             width: 37.9rem;
