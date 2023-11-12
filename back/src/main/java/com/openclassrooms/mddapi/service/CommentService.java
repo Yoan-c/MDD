@@ -3,7 +3,7 @@ package com.openclassrooms.mddapi.service;
 import com.openclassrooms.mddapi.entity.Comment;
 import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.entityDto.CommentDTO;
+import com.openclassrooms.mddapi.entity.dto.CommentDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;

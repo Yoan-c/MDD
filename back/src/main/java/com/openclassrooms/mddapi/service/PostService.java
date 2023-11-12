@@ -2,7 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.entityDto.PostDTO;
+import com.openclassrooms.mddapi.entity.dto.PostDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;

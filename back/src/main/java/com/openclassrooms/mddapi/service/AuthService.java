@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.entityDto.Login;
-import com.openclassrooms.mddapi.entityDto.Register;
+import com.openclassrooms.mddapi.entity.dto.LoginDTO;
+import com.openclassrooms.mddapi.entity.dto.RegisterDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import jakarta.validation.ConstraintViolation;
@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class AuthService {
     }
 
 
-    public void register(Register request){
+    public void register(RegisterDTO request){
         if (!checkValidationObject(request)) {
             throw new ApiCustomError("Veuillez remplir tous les champs", HttpStatus.BAD_REQUEST);
         }
@@ -58,7 +59,7 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String login(Login login) {
+    public String login(LoginDTO login) {
         String emailUser;
         if (!checkValidationObject(login)) {
             throw new ApiCustomError("Veuillez remplir les champs", HttpStatus.BAD_REQUEST);
@@ -92,12 +93,12 @@ public class AuthService {
         throw new ApiCustomError("Identifant / mot de passe incorrect", HttpStatus.BAD_REQUEST);
     }
 
-    public boolean checkValidationObject(Register register) {
-        Set<ConstraintViolation<Register>> violations = validator.validate(register);
+    public boolean checkValidationObject(RegisterDTO register) {
+        Set<ConstraintViolation<RegisterDTO>> violations = validator.validate(register);
         return violations.isEmpty();
     }
-    public boolean checkValidationObject(Login login) {
-        Set<ConstraintViolation<Login>> violations = validator.validate(login);
+    public boolean checkValidationObject(LoginDTO login) {
+        Set<ConstraintViolation<LoginDTO>> violations = validator.validate(login);
         return violations.isEmpty();
     }
 

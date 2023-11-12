@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.entityDto;
+package com.openclassrooms.mddapi.entity.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

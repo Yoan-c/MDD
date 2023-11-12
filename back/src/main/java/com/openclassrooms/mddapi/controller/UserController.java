@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.entity.Topic;
-import com.openclassrooms.mddapi.entityDto.UserDTO;
+import com.openclassrooms.mddapi.entity.dto.UserDTO;
 import com.openclassrooms.mddapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

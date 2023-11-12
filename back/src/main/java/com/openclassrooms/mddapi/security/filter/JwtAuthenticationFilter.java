@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.filter;
+package com.openclassrooms.mddapi.security.filter;
 
 import com.openclassrooms.mddapi.service.JwtService;
 import jakarta.servlet.FilterChain;

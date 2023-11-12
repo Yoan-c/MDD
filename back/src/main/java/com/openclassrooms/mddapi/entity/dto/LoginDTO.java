@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.entityDto;
+package com.openclassrooms.mddapi.entity.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CommentDTO {
+public class LoginDTO {
     @NotBlank
-    private String comment;
+    private String email;
     @NotBlank
-    private String idPost;
+    private String password;
 }

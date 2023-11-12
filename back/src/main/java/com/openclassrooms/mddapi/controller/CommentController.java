@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.entity.Comment;
-import com.openclassrooms.mddapi.entityDto.CommentDTO;
+import com.openclassrooms.mddapi.entity.dto.CommentDTO;
 import com.openclassrooms.mddapi.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

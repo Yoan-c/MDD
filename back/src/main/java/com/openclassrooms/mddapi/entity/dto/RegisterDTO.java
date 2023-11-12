@@ -1,10 +1,10 @@
-package com.openclassrooms.mddapi.entityDto;
+package com.openclassrooms.mddapi.entity.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class Register {
+public class RegisterDTO {
     @NotBlank
     private String pseudo;
     @NotBlank
