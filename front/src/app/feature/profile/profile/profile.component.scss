@@ -1,0 +1,123 @@
+.main {
+    padding: 2rem;
+
+    @media(max-width: 37.5em) {
+        padding: 1;
+    }
+
+    &__separate {
+        position: relative;
+
+        hr {
+            position: absolute;
+            width: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.topicSection {
+    margin-top: 4rem;
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+    }
+
+    &__card {
+        display: flex;
+        flex-wrap: wrap;
+
+        @media(max-width: 37.5em) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+
+    &__title {
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 28.1rem;
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            color: #a40f0f;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        input {
+            width: 28.1rem;
+            height: 4.8rem;
+            border-radius: .8rem;
+            border: 2px solid #7763C5;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.card {
+    background-color: #EEEEEE;
+    width: 39.1rem;
+    min-height: 17rem;
+    border-radius: .8rem;
+    padding: 2rem;
+    margin: 1rem;
+
+    @media(max-width: 37.5em) {
+        width: auto;
+    }
+
+    &__title {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__contain {
+        min-height: 6rem;
+    }
+}
+
+.error {
+    color: #a40f0f;
+}
+
+.success {
+    color: green;
+}
+
+.saveButton {
+    height: 4rem;
+    width: 13.9rem;
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,41 @@
+.main {
+    position: relative;
+    margin-top: 4rem;
+    margin-left: 4rem;
+
+    @media(max-width: 37.5em) {
+        margin-left: 0;
+    }
+
+    &__card {
+        display: flex;
+        flex-wrap: wrap;
+
+        @media(max-width: 37.5em) {
+            justify-content: center;
+        }
+    }
+}
+
+.card {
+    width: 39rem;
+    background-color: #EEEEEE;
+    min-height: 19rem;
+    border-radius: .8rem;
+    padding: 1rem;
+    margin: 1rem;
+
+    &__button {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__title {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    &__desc {
+        min-height: 7rem;
+    }
+}

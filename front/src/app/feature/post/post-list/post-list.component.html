@@ -1,0 +1,17 @@
+<div class="card" (click)="onClick()">
+  <div class="card__header">
+    <div class="card__title">{{ postItem!.title }}</div>
+    <div class="card__subtitle">
+      <span class="subtitle__date">{{
+        postItem!.created_at | date : "dd/MM/Y H:mm"
+      }}</span>
+      <span class="subtitle__auteur">{{ postItem!.idUser }}</span>
+    </div>
+  </div>
+  <div class="card__contain">
+    <p>
+      {{ postItem!.post | slice : 0 : 100
+      }}{{ postItem!.post!.length > 100 ? "..." : "" }}
+    </p>
+  </div>
+</div>

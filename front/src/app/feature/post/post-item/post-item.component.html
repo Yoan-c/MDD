@@ -1,0 +1,28 @@
+<app-header route="post"></app-header>
+<div class="post__main">
+  <div class="post__option">
+    <div class="option__left">
+      <div class="createPostButton">
+        <app-button
+          label="Créer un article"
+          color="white"
+          bgColor="rgba(119, 99, 197, 1)"
+          border="none"
+          (buttonEvent)="create($event)"
+        ></app-button>
+      </div>
+    </div>
+    <div class="option__right">
+      <p (click)="sortPost()">Trier par <span [innerHTML]="arrow"></span></p>
+    </div>
+  </div>
+  <div class="post__contain">
+    <div class="post__card">
+      <app-post-list
+        *ngFor="let post of postItem"
+        [postItem]="post"
+        class="post__list"
+      ></app-post-list>
+    </div>
+  </div>
+</div>

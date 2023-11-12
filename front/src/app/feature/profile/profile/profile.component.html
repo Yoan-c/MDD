@@ -1,0 +1,74 @@
+<app-header
+  route="profile"
+  srcImg="../../../../assets/activeProfile.png"
+></app-header>
+<div class="main">
+  <div class="profile">
+    <div class="profile__title">
+      <p>Profil utilisateur</p>
+    </div>
+    <div class="profile__form">
+      <p class="error" *ngIf="errorMsg" [innerHtml]="errorMsg"></p>
+      <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()" class="form">
+        <div class="form__group">
+          <input type="text" required [formControl]="pseudo" />
+        </div>
+        <div class="form__group">
+          <input type="email" [formControl]="email" required />
+        </div>
+        <div class="form__group">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" [formControl]="password" />
+        </div>
+        <div class="form__group">
+          <label for="confirmPassword">Confirmation mot de passe</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            [formControl]="confirmPassword"
+          />
+        </div>
+        <div class="form__group">
+          <div class="saveButton">
+            <app-button
+              label="Sauvegarder"
+              color="white"
+              border="none"
+              bgColor="rgba(119, 99, 197, 1)"
+            ></app-button>
+          </div>
+          <p class="logout" (click)="logout()">Se déconnecter</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="main__separate">
+    <hr />
+  </div>
+  <div class="topicSection">
+    <div class="topicSection__title">
+      <p>Abonnements</p>
+    </div>
+    <div class="topicSection__card">
+      <div class="card" *ngFor="let topic of topics">
+        <div class="card__title">
+          <p>{{ topic.label }}</p>
+        </div>
+        <div class="card__contain">
+          Description: {{ topic.topic | slice : 0 : 100
+          }}{{ topic.topic.length > 100 ? "..." : "" }}
+        </div>
+        <div class="card__button">
+          <app-button
+            label="Se désabonner"
+            (click)="unSubscribeUser(topic.id)"
+            color="white"
+            border="none"
+            bgColor="rgba(119, 99, 197, 1)"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="header__login">
+  <img src="../../../../assets/logo_min.png" alt="logo MDD" />
+</div>
+<div class="login__main">
+  <div class="main__header">
+    <div class="login__back">
+      <p><a routerLink="/">&larr;</a></p>
+    </div>
+    <div class="login__logo">
+      <img src="../../../../assets/logo_p6.png" alt="logo MDD" />
+    </div>
+  </div>
+  <div class="main__body">
+    <div class="loginform">
+      <div class="loginform__header">
+        <p>Se connecter</p>
+      </div>
+      <div class="loginform__body">
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+          <label for="email">email ou nom d'utilisateur</label>
+          <input id="email" type="text" [formControl]="pseudo" required />
+
+          <label for="password">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            [formControl]="password"
+            required
+          />
+          <ng-container *ngIf="errorMsg">
+            <p class="errorMsg" [innerHTML]="errorMsg"></p>
+          </ng-container>
+          <div class="authButton">
+            <app-button
+              label="Se connecter"
+              color="white"
+              bgColor="rgba(119, 99, 197, 1)"
+              minWidth="15rem"
+              border="none"
+            ></app-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

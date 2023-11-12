@@ -1,0 +1,43 @@
+<div class="header">
+  <div class="header__left">
+    <div class="header__img">
+      <img src="../../../../assets/logo_p6.png" alt="logo" />
+    </div>
+  </div>
+  <div class="header__right">
+    <div
+      id="menuMobile"
+      class="menu__logoUser"
+      [@slideAnimation]="isSlideIn ? 'slide-in' : ''"
+    >
+      <div class="header__menu">
+        <ul>
+          <li #post (click)="goPost()">Articles</li>
+          <li #topic (click)="goTopic()">Thèmes</li>
+        </ul>
+      </div>
+      <div class="header__logoUser">
+        <img
+          *ngIf="srcImg; else imgUser"
+          id="profileImg"
+          [src]="srcImg"
+          alt="user image"
+          (click)="goProfile()"
+          #profile
+        />
+        <ng-template #imgUser>
+          <img
+            id="profileImg"
+            src="../../../../assets/useruserImg.png"
+            alt="user image"
+            (click)="goProfile()"
+            #profile
+          />
+        </ng-template>
+      </div>
+    </div>
+    <div class="header__logoMenu" (click)="displayMenu()">
+      <img src="../../../../assets/menuLogo.png" alt="logo menu" />
+    </div>
+  </div>
+</div>
