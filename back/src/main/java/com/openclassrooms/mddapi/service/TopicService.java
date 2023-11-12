@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,11 @@ import java.util.Set;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TopicService {
 
     private final TopicRepository topicRepository;
     private final Validator validator;
-
-    public TopicService(TopicRepository tr, Validator val){
-        this.topicRepository = tr;
-        this.validator = val;
-    }
 
     public Topic getTopicById(String idTopic){
         Optional<Topic> topic = topicRepository.findById(idTopic);

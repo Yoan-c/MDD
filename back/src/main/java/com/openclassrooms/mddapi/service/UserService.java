@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entity.dto.UserDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,19 +17,13 @@ import java.util.regex.Pattern;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final TopicService topicService;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository ur, TopicService ts, JwtService js, PasswordEncoder ps) {
-        this.userRepository = ur;
-        this.jwtService = js;
-        this.topicService = ts;
-        this.passwordEncoder = ps;
-    }
 
     public User saveUser (User user){
         return userRepository.save(user);

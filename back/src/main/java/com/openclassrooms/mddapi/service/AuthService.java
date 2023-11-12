@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,7 @@ import java.util.Set;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -28,19 +30,6 @@ public class AuthService {
     private final Validator validator;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-
-    public AuthService( UserRepository ur,
-                        PasswordEncoder pe,
-                        Validator val,
-                        AuthenticationManager at,
-                        JwtService js){
-        this.userRepository = ur;
-        this.passwordEncoder = pe;
-        this.validator = val;
-        this.authenticationManager = at;
-        this.jwtService = js;
-    }
-
 
     public void register(RegisterDTO request){
         if (!checkValidationObject(request)) {

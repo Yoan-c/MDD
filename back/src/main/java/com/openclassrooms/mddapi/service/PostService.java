@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entity.dto.PostDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,13 @@ import java.util.HashMap;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
     private final UserService userService;
     private final TopicService topicService;
 
-    public PostService(PostRepository pr, TopicService ts, UserService us){
-        this.postRepository = pr;
-        this.topicService = ts;
-        this.userService = us;
-    }
 
     public ArrayList<Post> getAll(){
         return (ArrayList<Post>) postRepository.findAll();

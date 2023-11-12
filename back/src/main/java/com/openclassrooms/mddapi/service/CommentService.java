@@ -6,6 +6,7 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.entity.dto.CommentDTO;
 import com.openclassrooms.mddapi.error.ApiCustomError;
 import com.openclassrooms.mddapi.repository.CommentRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,13 @@ import java.util.ArrayList;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
     private final PostService postService;
     private final UserService userService;
 
-    public CommentService(CommentRepository cr, PostService ps, UserService us){
-        this.commentRepository = cr;
-        this.postService = ps;
-        this.userService = us;
-    }
 
     public ArrayList<Comment> getAllCommentByPost(String idPost){
         if (!postService.isPostExist(idPost))
