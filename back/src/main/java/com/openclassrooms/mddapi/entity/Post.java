@@ -18,13 +18,9 @@ import java.util.List;
 public class Post {
     @Id
     private String id;
-    @NotBlank
     private String title;
-    @NotBlank
     private String post;
-    @NotBlank
     private String idTopic;
-    @NotBlank
     private String idUser;
     private List<String> idComment;
     @CreatedDate

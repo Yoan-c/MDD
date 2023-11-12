@@ -23,11 +23,8 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     private String id;
-    @NotBlank
     private String email;
-    @NotBlank
     private String password;
-    @NotBlank
     private String pseudo;
     private List<String> idComment;
     private List<String> idPost;

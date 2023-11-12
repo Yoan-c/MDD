@@ -17,9 +17,7 @@ import java.util.Date;
 public class Topic {
     @Id
     private String id;
-    @NotBlank
     private String label;
-    @NotBlank
     private String topic;
     @CreatedDate
     private Date created_at;

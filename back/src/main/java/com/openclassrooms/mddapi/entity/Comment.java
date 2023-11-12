@@ -19,11 +19,8 @@ import java.util.Date;
 public class Comment {
     @Id
     private String id;
-    @NotBlank
     private String comment;
-    @NotBlank
     private String idPost;
-    @NotBlank
     private String idUser;
     @CreatedDate
     private Date created_at;
