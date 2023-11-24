@@ -62,12 +62,12 @@ export class ProfileComponent implements OnInit , OnDestroy {
       this.unSubTopics$.unsubscribe();
   }
 
-  logout(){
+  logout(): void{
     this.auth$ = this.authService.logout().subscribe();
     this.router.navigate(['/']);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.profileFormGroup.status === "INVALID")
       return;
     if (this.checkInvalidPassword())
@@ -93,7 +93,7 @@ export class ProfileComponent implements OnInit , OnDestroy {
     )
   }
 
-  checkInvalidPassword() {
+  checkInvalidPassword(): boolean {
     if (this.password.value === "" && this.confirmPassword.value === "")
       return false;
     if (this.password.value === this.confirmPassword.value && this.utilsService.isPasswordValid(this.password.value))
@@ -109,7 +109,7 @@ export class ProfileComponent implements OnInit , OnDestroy {
     return true;
   }
 
-  showSuccessMsg() {
+  showSuccessMsg(): void {
     this.successMsg = "Utilisateur modifié";
     this.errorMsg = "";
   }

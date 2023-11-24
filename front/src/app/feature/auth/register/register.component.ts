@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
       this.register$.unsubscribe();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.registerForm.status === "INVALID"){
       this.showError();
       return
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy  {
     )
   }
 
-  showError(){
+  showError(): void{
     this.onError = true;
     this.errorMsg = "erreur : ";
     const controls = this.registerForm.controls;

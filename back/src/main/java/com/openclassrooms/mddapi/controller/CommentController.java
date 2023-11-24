@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -16,14 +17,9 @@ import java.util.ArrayList;
 @Slf4j
 @RestController
 @RequestMapping("/api/comment")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class CommentController {
-
     private final CommentService commentService;
-
-    public CommentController(CommentService cs){
-        this.commentService = cs;
-    }
 
     @Operation(
             summary = "Get all comment By id post",

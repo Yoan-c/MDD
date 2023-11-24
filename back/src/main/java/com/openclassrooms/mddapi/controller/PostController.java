@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -17,14 +18,9 @@ import java.util.HashMap;
 @Slf4j
 @RestController
 @RequestMapping("/api/post")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class PostController {
-
     private final PostService postService;
-
-    public PostController(PostService ps){
-        this.postService = ps;
-    }
 
     @Operation(
             summary = "Get all post",

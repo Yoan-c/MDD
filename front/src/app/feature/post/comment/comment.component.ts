@@ -41,7 +41,7 @@ export class CommentComponent implements OnInit, OnDestroy{
     this.comments$.unsubscribe();
   }
 
-  onClick() {
+  onClick(): void {
     if (!this.commentContain?.nativeElement.value)
       return;
     this.comment.comment = this.commentContain?.nativeElement.value;

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.login$.unsubscribe();
   }
 
-  onSubmit(){
+  onSubmit(): void{
     if (this.loginFormGroup.status === 'INVALID'){
       this.errorMsg= "erreur : Vérifier les différents champs";
       return;

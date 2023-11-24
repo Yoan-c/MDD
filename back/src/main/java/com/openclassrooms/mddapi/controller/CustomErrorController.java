@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class CustomErrorController {
     public ResponseEntity<ApiError> CustomError(Object message, HttpStatus status) {
         ApiError error = new ApiError();

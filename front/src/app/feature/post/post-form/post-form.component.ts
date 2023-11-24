@@ -48,7 +48,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
       this.post$.unsubscribe();
   }
 
-  onSubmit(){
+  onSubmit(): void{
     this.post.title = this.postTitle.value!;
     this.post.post = this.postContain.value!;
     this.post.idTopic = this.theme.value!;

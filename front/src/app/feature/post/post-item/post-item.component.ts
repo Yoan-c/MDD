@@ -47,7 +47,7 @@ export class PostItemComponent implements OnInit, OnDestroy{
       this.router.navigate(['post/create']);
   }
 
-  sortPost(){
+  sortPost(): void{
 
     if (this.sortPostAsc){
       this.sortPostAsc = !this.sortPostAsc;
@@ -60,11 +60,11 @@ export class PostItemComponent implements OnInit, OnDestroy{
     this.postItem = this.postItem.sort(this.sortPostByCreatedAsc);
   }
 
-  sortPostByCreatedAsc(postItem : PostItem, newPostItem : PostItem) {
+  sortPostByCreatedAsc(postItem : PostItem, newPostItem : PostItem): number {
     return new Date(newPostItem.created_at!).getTime() - new Date(postItem.created_at!).getTime();
   }
 
-  sortPostByCreatedDesc(postItem : PostItem, newPostItem : PostItem) {
+  sortPostByCreatedDesc(postItem : PostItem, newPostItem : PostItem): number {
     return new Date(postItem.created_at!).getTime() - new Date(newPostItem.created_at!).getTime();
   }
 }

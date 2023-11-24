@@ -38,7 +38,7 @@ export class TopicItemComponent implements OnInit, OnDestroy {
       this.subscribe$.unsubscribe();
   }
 
-  onClick(id : string, appButton : ButtonComponent) {
+  onClick(id : string, appButton : ButtonComponent) : void {
 
     if (this.user.idTopic?.includes(id))
       return;

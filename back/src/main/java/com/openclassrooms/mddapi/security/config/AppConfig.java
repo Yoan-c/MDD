@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.configuration;
+package com.openclassrooms.mddapi.security.config;
 
 import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.context.annotation.Bean;

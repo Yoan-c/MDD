@@ -12,23 +12,23 @@ export class AuthService {
 
     constructor(private http : HttpClient){}
 
-    getIsAuthenticated(){
+    getIsAuthenticated() : boolean{
         return this.isAuthenticate;
     }
 
-    setIsAuthenticated(isAuthenticated: boolean){
+    setIsAuthenticated(isAuthenticated: boolean): void{
         this.isAuthenticate = isAuthenticated;
     }
 
-    getToken(){
+    getToken(): string|null{
         return localStorage.getItem('jwt');
     }
     
-    setToken(token: string){
+    setToken(token: string): void{
         localStorage.setItem('jwt', token);
     }
 
-    isLoggued(){
+    isLoggued(): boolean{
         let token = localStorage.getItem('jwt');
         return token !== null ? true : false;
     }
@@ -40,7 +40,7 @@ export class AuthService {
         return this.http.get<void>(`${this.apiUrl}/logout`);
     }
 
-    login(token : string) {
+    login(token : string): void {
         this.setToken(token);
     }
 }

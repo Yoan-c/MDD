@@ -41,19 +41,19 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    this.cdr.detectChanges();
   }
 
-  goPost() {
+  goPost(): void {
     this.router.navigate(['/post']);
   }
 
-  goTopic() {
+  goTopic(): void {
     this.router.navigate(['/topic']);
   }
 
-  goProfile() {
+  goProfile(): void {
     this.router.navigate(['/profile']);
   }
 
-  displayMenu(){
+  displayMenu(): void{
     this.isSlideIn = true;
   }
 }

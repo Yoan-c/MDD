@@ -7,12 +7,12 @@ import { Router } from "@angular/router";
 export class ErrorApp {
     constructor(private router : Router){}
 
-    checkError(err : any){
+    checkError(err : any): void{
         if (err.status === 401)
             this.redirect('/login');
     }
 
-    redirect(url : string) {
+    redirect(url : string): void {
         this.router.navigate(['/']);
     }
 }
